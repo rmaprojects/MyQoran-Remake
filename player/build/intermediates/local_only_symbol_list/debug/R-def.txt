@@ -1,0 +1,25 @@
+R_DEF: Internal format may change without notice
+local
+dimen snow_notif_icon_size_big
+mipmap snow_ic_notif_pause
+mipmap snow_ic_notif_play
+mipmap snow_ic_notif_skip_to_next
+mipmap snow_ic_notif_skip_to_previous
+mipmap snow_ic_notif_small_icon
+mipmap snow_notif_default_icon
+string snow_buffering
+string snow_error_data_load_failed
+string snow_error_file_not_found
+string snow_error_get_url_failed
+string snow_error_network_error
+string snow_error_no_error
+string snow_error_only_wifi_network
+string snow_error_out_of_memory
+string snow_error_player_error
+string snow_error_prepare_music_item_failed
+string snow_error_unknown_error
+string snow_music_item_unknown_album
+string snow_music_item_unknown_artist
+string snow_music_item_unknown_title
+string snow_notification_channel_name
+string snow_preparing
