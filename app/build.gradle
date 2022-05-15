@@ -77,4 +77,7 @@ dependencies {
 
     // optional, auto initialization module
     implementation 'com.chibatching.kotpref:initializer:2.13.1'
+
+    //Fastscroll
+    implementation project (":fastscroll")
 }
