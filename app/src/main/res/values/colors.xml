@@ -115,4 +115,12 @@
     <color name="md_theme_dark_primaryInverse_blue">#006A65</color>
 
 
+    <color name="bookmarkContainerColorLight">#333cff</color>
+    <color name="bookmarkContainerColorDark">#0000ad</color>
+    <color name="bookmarkColor">#bdc2ff</color>
+    <color name="bookmarkColorDark">#dfe0ff</color>
+    <color name="recentReadColor">#FBA344</color>
+    <color name="recentReadColorDark">#ffb86f</color>
+    <color name="recentReadColorContainerLight">#8c4f00</color>
+    <color name="recentReadColorContainerDark">#6b3b00</color>
 </resources>

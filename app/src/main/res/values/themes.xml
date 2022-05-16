@@ -26,6 +26,13 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface_default</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface_default</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse_default</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorBackground">#FFF</item>
+        <item name="colorBookmarkContainer">@color/bookmarkContainerColorLight</item>
+        <item name="colorBookmark">@color/bookmarkColor</item>
+        <item name="colorRecentRead">@color/recentReadColor</item>
+        <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Light.NoActionBar">
@@ -55,5 +62,12 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface_blue</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface_blue</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse_blue</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorBackground">#FFF</item>
+        <item name="colorBookmarkContainer">@color/bookmarkContainerColorLight</item>
+        <item name="colorBookmark">@color/bookmarkColor</item>
+        <item name="colorRecentRead">@color/recentReadColor</item>
+        <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
     </style>
 </resources>

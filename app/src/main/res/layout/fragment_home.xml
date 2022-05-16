@@ -1,22 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="12dp"
+                android:layout_height="420dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:background="?selectableItemBackground"
+                    android:id="@+id/openDrawerBtn"
+                    android:layout_width="32dp"
+                    android:src="@drawable/ic_baseline_menu_24"
+                    android:layout_height="32dp"
+                    android:layout_marginBottom="12dp"
+                    app:tint="?colorOnBackground" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_salam"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sekarang tanggal"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.Material3.CardView.Elevated"
+                        android:layout_width="match_parent"
+                        android:layout_height="84dp"
+                        android:layout_margin="8dp"
+                        android:backgroundTint="?colorRecentReadContainer"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackground">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/lastReadIcon"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:src="@drawable/ic_baseline_access_time_filled_24"
+                                app:tint="?colorRecentRead" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_toRightOf="@id/lastReadIcon"
+                                android:text="@string/txt_recent_read"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="?colorRecentRead" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.Material3.CardView.Elevated"
+                        android:layout_width="match_parent"
+                        android:layout_height="84dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="?colorBookmarkContainer"
+                        android:background="?selectableItemBackground">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/bookmarkIcon"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:src="@drawable/ic_baseline_bookmark_24"
+                                app:tint="?colorBookmark" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_toRightOf="@id/bookmarkIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textColor="?colorBookmark"
+                                android:text="Bookmark"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="?selectableItemBackground"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_height="100dp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/txt_slide_down_pls"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_height="12dp"
+                    app:tint="?colorOnBackground" />
+            </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            app:cardElevation="12dp"
+            android:backgroundTint="?colorBackground"
+            style="@style/Widget.Material3.CardView.Elevated"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:tabMode="fixed">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Surah" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jozz" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Page" />
+                </com.google.android.material.tabs.TabLayout>
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_baseline_remove_24"
+                    android:layout_height="28dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

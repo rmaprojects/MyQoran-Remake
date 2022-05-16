@@ -4,15 +4,15 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="16"
-6-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml
+6-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="31" />
-7-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml
+7-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml
 8
 9    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-9-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml:4:5-79
-9-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml:4:22-76
+9-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml:4:5-79
+9-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml:4:22-76
 10    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-10-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml:5:5-76
-10-->/Volumes/Project/Android/SabilulKhayrAlIbana/player/src/main/AndroidManifest.xml:5:22-73
+10-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml:5:5-76
+10-->/home/raka/Android-Studio-Projects/MyQoranRemake/player/src/main/AndroidManifest.xml:5:22-73
 11
 12</manifest>

@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.rmaproject.myqoran.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_read"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.rmaproject.myqoran.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_settings"
+        android:name="com.rmaproject.myqoran.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.rmaproject.myqoran.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_about"
+        android:name="com.rmaproject.myqoran.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
