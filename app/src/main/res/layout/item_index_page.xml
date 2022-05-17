@@ -14,7 +14,7 @@
             android:layout_height="90dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_nama_surah"
+                android:id="@+id/txt_page_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -35,7 +35,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_jumlah_ayat"
+                    android:id="@+id/txt_first_ayah_in_page"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Al-Fatihah: 1"
@@ -47,7 +47,7 @@
                     android:text="-"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_descend_place"
+                    android:id="@+id/txt_last_ayah_in_page"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Al-Fatihah: 7"

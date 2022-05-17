@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -55,12 +56,12 @@ dependencies {
     def room_version = "2.4.2"
 
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // To use Kotlin annotation processing tool (kapt)
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     // To use Kotlin Symbolic Processing (KSP)
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
@@ -80,4 +81,11 @@ dependencies {
 
     //Fastscroll
     implementation project (":fastscroll")
+
+    //UmmalQura Calendar
+    implementation 'com.github.msarhan:ummalqura-calendar:2.0.1'
+
+    //Joda Time
+    implementation 'joda-time:joda-time:2.10.14'
+
 }

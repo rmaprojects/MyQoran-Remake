@@ -9,13 +9,15 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.10486322188449848" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1721014492753623" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2558714462299135" />
         <entry key="app/src/main/res/layout/fragment_index_jozz.xml" value="0.1721014492753623" />
+        <entry key="app/src/main/res/layout/fragment_index_juz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_page.xml" value="0.25060827250608275" />
         <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/item_index.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_index_jozz.xml" value="0.26369426751592356" />
+        <entry key="app/src/main/res/layout/item_index_juz.xml" value="0.29529243937232524" />
         <entry key="app/src/main/res/layout/item_index_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_index_surah.xml" value="0.33" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2" />

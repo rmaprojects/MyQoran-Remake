@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.databinding.FragmentHomeBinding
+import com.rmaproject.myqoran.ui.home.adapter.viewpager.ViewPagerAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
