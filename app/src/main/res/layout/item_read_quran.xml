@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/header_surah_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_height="match_parent">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_surah_name_en"
+                android:layout_width="wrap_content"
+                android:text="Al-Fatihah"
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_descend_place"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="Makiyyah"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_total_ayah"
+                    android:layout_width="match_parent"
+                    android:text="7 Ayat"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_surah_name_ar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/usmani_font"
+                    android:gravity="center_horizontal"
+                    android:text="الفَاتِحة"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_play_all_ayah"
+                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Putar Semua Ayat"
+                    app:elevation="12dp"
+                    app:icon="@drawable/ic_baseline_play_circle_filled_24"
+                    app:iconGravity="textStart" />
+            </RelativeLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_ayah"
+        android:longClickable="true"
+        android:layout_width="match_parent"
+        app:fontFamily="@font/usmani_font"
+        android:layout_margin="16dp"
+        android:textSize="32dp"
+        android:text="بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_translate"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:text="Dengan nama Alloh yang maha pengasih lagi maha penyayang"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

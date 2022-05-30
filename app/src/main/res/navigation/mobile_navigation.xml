@@ -8,8 +8,12 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.rmaproject.myqoran.ui.home.HomeFragment"
-        android:label="@string/menu_read"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_read_fragment"
+            app:destination="@id/nav_read_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
@@ -22,4 +26,9 @@
         android:name="com.rmaproject.myqoran.ui.about.AboutFragment"
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        tools:layout="@layout/fragment_read_quran"
+        android:id="@+id/nav_read_fragment"
+        android:name="com.rmaproject.myqoran.ui.read.ReadFragment"
+        android:label="@string/nav_read_fragment" />
 </navigation>

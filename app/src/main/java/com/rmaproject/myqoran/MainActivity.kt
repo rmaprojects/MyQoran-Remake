@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+        binding.drawerLayout
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -34,19 +35,24 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,R.id.nav_settings, R.id.nav_about
+                R.id.nav_home,R.id.nav_settings, R.id.nav_about, R.id.nav_read_fragment
             ), drawerLayout
         )
+
+        
 
         navController.addOnDestinationChangedListener() { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_home -> {
-                    binding.appBarMain.toolbar.isVisible = false
+                    binding.appBarMain.toolbar.isVisible = true
                 }
                 R.id.nav_settings -> {
                     binding.appBarMain.toolbar.isVisible = true
                 }
                 R.id.nav_about -> {
+                    binding.appBarMain.toolbar.isVisible = true
+                }
+                R.id.nav_read_fragment -> {
                     binding.appBarMain.toolbar.isVisible = true
                 }
             }

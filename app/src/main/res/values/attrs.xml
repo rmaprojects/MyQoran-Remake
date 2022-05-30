@@ -5,4 +5,5 @@
     <attr name="colorBookmarkContainer" format="color"/>
     <attr name="colorRecentRead" format="color"/>
     <attr name="colorRecentReadContainer" format="color"/>
+    <attr name="topAppbarColor" format="color"/>
 </resources>

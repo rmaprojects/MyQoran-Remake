@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @DatabaseView("SELECT MAX(id) as id, page, sora, aya_no, aya_text, sora_name_en, sora_name_ar FROM quran GROUP by page ORDER BY id")
 
-data class AyahTerakhirFinderPage(
+data class LastAyahFinderPage(
 
     @PrimaryKey val id:Int? = 0,
     @ColumnInfo(name = "page") val page : Int? = 0,

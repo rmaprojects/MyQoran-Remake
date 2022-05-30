@@ -25,7 +25,7 @@
         <item name="colorOutline">@color/md_theme_dark_outline_default</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface_default</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface_default</item>
-        <item name="colorPrimaryInverse">@color/md_theme_dark_primaryInverse_default</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_primaryContainer_default</item>
 
         <item name="android:windowTranslucentStatus">true</item>
         <item name="colorBackground">@color/md_theme_dark_background_default</item>
@@ -33,6 +33,7 @@
         <item name="colorBookmark">@color/bookmarkColorDark</item>
         <item name="colorRecentRead">@color/recentReadColorDark</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
+        <item name="topAppbarColor">@color/md_theme_dark_primary_default</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Dark.NoActionBar">
@@ -69,5 +70,6 @@
         <item name="colorBookmark">@color/bookmarkColorDark</item>
         <item name="colorRecentRead">@color/recentReadColorDark</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
+        <item name="topAppbarColor">@color/md_theme_dark_primary_blue</item>
     </style>
 </resources>

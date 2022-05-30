@@ -7,7 +7,7 @@ import com.rmaproject.myqoran.ui.home.index.IndexByJuzFragment
 import com.rmaproject.myqoran.ui.home.index.IndexByPageFragment
 import com.rmaproject.myqoran.ui.home.index.IndexBySurahFragment
 
-class ViewPagerAdapter(context: FragmentActivity) :  FragmentStateAdapter(context){
+class ViewPagerAdapter (context : FragmentActivity) : FragmentStateAdapter(context) {
     override fun getItemCount() = 3
 
     override fun createFragment(position: Int): Fragment {
