@@ -62,7 +62,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val quranDao = quranDatabase.quranDao()
         val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah)
         binding.viewPager.adapter = adapter
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, index ->
+        TabLayoutMediator (binding.tabLayout, binding.viewPager) { tab, index ->
             when (indexType) {
                 INDEX_BY_SURAH -> {
                     quranDao.getSurahNames().asLiveData().observe(viewLifecycleOwner) { listSurah ->

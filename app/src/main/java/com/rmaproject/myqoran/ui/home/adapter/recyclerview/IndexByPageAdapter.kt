@@ -13,25 +13,36 @@ import com.rmaproject.myqoran.database.model.Page
 import com.rmaproject.myqoran.databinding.ItemIndexPageBinding
 import com.rmaproject.myqoran.ui.home.adapter.recyclerview.IndexByPageAdapter.IndexByPageAdapterViewHolder
 
-class IndexByPageAdapter(private val pageList:List<Page>, private val lastAyahList:List<LastAyahFinderPage>) : Adapter<IndexByPageAdapterViewHolder>(), FastScroller.SectionIndexer {
+class IndexByPageAdapter(
+    private val pageList: List<Page>,
+    private val lastAyahList: List<LastAyahFinderPage>
+) : Adapter<IndexByPageAdapterViewHolder>(), FastScroller.SectionIndexer {
+
+
+    var listener:((page: Page, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): IndexByPageAdapterViewHolder {
-        return IndexByPageAdapterViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_index_page, parent, false))
+        return IndexByPageAdapterViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_index_page, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: IndexByPageAdapterViewHolder, position: Int) {
         val pages = pageList[position]
         val lastAyah = lastAyahList[position]
+        holder.binding.clickableCardView.setOnClickListener {
+            listener?.invoke(pages, pageList.size)
+        }
         holder.bindView(pages, lastAyah)
     }
 
     override fun getItemCount() = pageList.size
 
-    class IndexByPageAdapterViewHolder(view:View) : RecyclerView.ViewHolder(view) {
-        private val binding:ItemIndexPageBinding by viewBinding()
+    class IndexByPageAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding: ItemIndexPageBinding by viewBinding()
         fun bindView(pages: Page, lastAyah: LastAyahFinderPage) {
             binding.txtPageIndicator.text = "Page ${pages.page}"
             binding.txtFirstAyahInPage.text = "Surah ${pages.SurahName_en} ${pages.AyahNumber}"

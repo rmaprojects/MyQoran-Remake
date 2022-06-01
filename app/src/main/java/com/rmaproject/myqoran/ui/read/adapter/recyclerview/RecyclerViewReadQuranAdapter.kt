@@ -32,20 +32,20 @@ class RecyclerViewReadQuranAdapter(
         val quran = listQuran[position]
         val totalAyah = listTotalAyah[quran.surahNumber!! - 1]
         val context = holder.itemView.context
-        holder.bindView(quran, position, totalAyah, context)
+        holder.bindView(quran, totalAyah, context)
     }
 
     override fun getItemCount() = listQuran.size
 
     class RecyclerViewReadQuranAdapterViewHolder(view:View) : ViewHolder(view) {
         val binding:ItemReadQuranBinding by viewBinding()
-        fun bindView(quran: Quran, position: Int, totalAyah: Int, context:Context) {
-            setTextViewValues(quran, position, totalAyah, context)
+        fun bindView(quran: Quran, totalAyah: Int, context:Context) {
+            setTextViewValues(quran, totalAyah, context)
             setViewClickListener()
         }
 
-        private fun setTextViewValues(quran: Quran, position: Int, totalAyah: Int, context: Context) {
-            binding.headerSurahName.isVisible = position == 0
+        private fun setTextViewValues(quran: Quran, totalAyah: Int, context: Context) {
+            binding.headerSurahName.isVisible = quran.ayahNumber == 1
             binding.txtSurahNameEn.text = quran.surahNameEn
             binding.txtDescendPlace.text = quran.turunSurah
             binding.txtAyah.text = applyTajweed(quran, context)

@@ -15,6 +15,8 @@ import com.rmaproject.myqoran.ui.home.adapter.recyclerview.IndexByJuzAdapter.Ind
 
 class IndexByJuzAdapter(private val juzList:List<Juz>, private val lastSurahOfJuzList:List<LastAyahFinderJuz>) : Adapter<IndexByJuzAdapterViewHolder>(), FastScroller.SectionIndexer {
 
+    var listener:((Juz, Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndexByJuzAdapterViewHolder {
         return IndexByJuzAdapterViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_index_juz, parent, false))
     }
@@ -22,13 +24,16 @@ class IndexByJuzAdapter(private val juzList:List<Juz>, private val lastSurahOfJu
     override fun onBindViewHolder(holder: IndexByJuzAdapterViewHolder, position: Int) {
         val juz = juzList[position]
         val lastAyah = lastSurahOfJuzList[position]
+        holder.binding.clickableCardView.setOnClickListener {
+            listener?.invoke(juz, juzList.size)
+        }
         holder.bindView(juz, lastAyah)
     }
 
     override fun getItemCount() = juzList.size
 
     class IndexByJuzAdapterViewHolder(itemView: View) : ViewHolder(itemView) {
-        private val binding: ItemIndexJuzBinding by viewBinding()
+        val binding: ItemIndexJuzBinding by viewBinding()
         fun bindView(juz: Juz, lastAyah: LastAyahFinderJuz) {
             binding.txtJuzNumber.text = "Juz ${juz.juzNumber}"
             binding.txtFirstSurahInJuz.text = "Surah ${juz.SurahName_en} ${juz.nomorAyah}"
