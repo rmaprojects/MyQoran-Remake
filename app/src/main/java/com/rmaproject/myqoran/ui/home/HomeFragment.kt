@@ -19,7 +19,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding: FragmentHomeBinding by viewBinding()
     private val viewModel:MainTabViewModel by viewModels()
-    private val homeViewModel:HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,7 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setHasOptionsMenu(false)
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
         setAdapter(viewPagerAdapter)
-        setFab()
         setHijriDate()
     }
 
@@ -37,19 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val cal = UmmalquraCalendar(en)
         val tanggalHijriyyah = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH)
         val tanggalanHijriyyah = "${namaHari[converDayToID(tanggalHijriyyah)]}, ${cal[Calendar.DAY_OF_MONTH]} ${cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en)} ${cal[Calendar.YEAR]}"
-        binding.hijriDateTxt.text = "$tanggalanHijriyyah"
-    }
-
-    private fun setFab() {
-        homeViewModel.hideFabListener = {
-            binding.fab.hide()
-        }
-        homeViewModel.showFabListener = {
-            binding.fab.show()
-        }
-        binding.fab.setOnClickListener {
-            homeViewModel.goToTopListener?.invoke()
-        }
+        binding.hijriDateTxt.text = tanggalanHijriyyah
     }
 
     private fun setAdapter(adapter: ViewPagerAdapter) {

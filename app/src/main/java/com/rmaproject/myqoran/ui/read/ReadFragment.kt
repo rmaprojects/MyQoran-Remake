@@ -3,7 +3,7 @@ package com.rmaproject.myqoran.ui.read
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.appbar.MaterialToolbar
@@ -17,7 +17,7 @@ import com.rmaproject.myqoran.viewmodel.MainTabViewModel
 class ReadFragment : Fragment(R.layout.fragment_read_quran) {
 
     private val binding: FragmentReadQuranBinding by viewBinding()
-    private val viewModel:MainTabViewModel by viewModels()
+    private val viewModel:MainTabViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,13 +47,20 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
             }
         }
 
-        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner)
-        setViewPagerAdapter(adapter, jumpToPosition!!, indexType)
+        viewModel.getTotalAyahList().observe(viewLifecycleOwner){ listTotalAyah ->
+            setViewPagerAdapter(jumpToPosition!!, indexType,  totalIndex, listTotalAyah)
+        }
     }
 
-    private fun setViewPagerAdapter(adapter: ViewPagerAdapter, jumpToPosition:Int, indexType :Int) {
+    private fun setViewPagerAdapter(
+        jumpToPosition: Int,
+        indexType: Int,
+        totalIndex: Int,
+        listTotalAyah: List<Int>
+    ) {
         val quranDatabase = QuranDatabase.getInstance(requireContext())
         val quranDao = quranDatabase.quranDao()
+        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah)
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, index ->
             when (indexType) {

@@ -2,10 +2,10 @@ package com.rmaproject.myqoran.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rmaproject.myqoran.database.model.Surah
 
 class MainTabViewModel : ViewModel() {
     private val tabPosition = MutableLiveData<Int>()
-    private val totalAyah = MutableLiveData<Int>()
 
     fun setTabPosition(value:Int) {
         tabPosition.value = value
@@ -15,11 +15,17 @@ class MainTabViewModel : ViewModel() {
         return tabPosition.value?: 0
     }
 
-    fun setTotalAyah(value:Int) {
-        totalAyah.value = value
-    }
+    private val totalAyahs: MutableLiveData<List<Int>> = MutableLiveData()
 
-    fun getTotalAyah() : Int {
-        return totalAyah.value?: 0
+    fun getTotalAyahList(): MutableLiveData<List<Int>> = totalAyahs.value?.let { totalAyahs } ?: MutableLiveData()
+
+
+    fun setTotalAyahList(surahList:List<Surah>) {
+        val listTotalAyahs = mutableListOf<Int>()
+        surahList.forEach {
+            val numberOfAyah = it.numberOfAyah?:1
+            listTotalAyahs.add(numberOfAyah)
+        }
+        totalAyahs.value = listTotalAyahs
     }
 }
