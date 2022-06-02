@@ -16,9 +16,9 @@
         <entry key="app/src/main/res/layout/fragment_index_jozz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_juz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_page.xml" value="0.25060827250608275" />
-        <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.43125" />
         <entry key="app/src/main/res/layout/fragment_read_quran.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1721014492753623" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_index.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_index_jozz.xml" value="0.26369426751592356" />
         <entry key="app/src/main/res/layout/item_index_juz.xml" value="0.29529243937232524" />

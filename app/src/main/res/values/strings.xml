@@ -15,4 +15,5 @@
     <string name="txt_recent_read">Recent Read</string>
     <string name="txt_slide_down_pls">Geser kebawah untuk memulai baca Quran</string>
     <string name="nav_read_fragment">Read Fragment</string>
+    <string name="txt_english">English</string>
 </resources>

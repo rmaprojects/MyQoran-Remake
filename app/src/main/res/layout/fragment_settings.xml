@@ -1,6 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:padding="8dp"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="6dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:text="Tampilan"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_dark_mode"
+            android:background="?selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="36dp"
+                    android:src="@drawable/ic_baseline_brightness_medium_24"
+                    android:layout_height="36dp"
+                    app:tint="?colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Dark Mode"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Ubah tampilan jadi gelap"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_settings_dark_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_change_theme"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:background="?selectableItemBackground"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="36dp"
+                    android:src="@drawable/ic_baseline_circle_24"
+                    android:layout_height="36dp"
+                    app:tint="?colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Ganti tema"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Sesuaikan warna aplikasi sesukamu"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="6dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:text="Pengaturan bacaan"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_language"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:background="?selectableItemBackground"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="36dp"
+                    android:src="@drawable/ic_language_icon"
+                    android:layout_height="36dp"
+                    app:tint="?colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Bahasa"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Atur bahasa untuk terjemah dan footnote"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:background="?selectableItemBackground"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:drawableStart="@drawable/ic_baseline_text_fields_24"
+                    android:text="Ukuran teks per ayat"
+                    android:drawableTint="?colorPrimary"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_settings_ayah_preview"
+                    android:layout_width="match_parent"
+                    android:text="بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم"
+                    android:layout_margin="16dp"
+                    android:textSize="35sp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider_settings_ayah_size"
+                    android:layout_width="match_parent"
+                    app:labelBehavior="gone"
+                    android:contentDescription="Slider atur ukuran teks"
+                    android:valueFrom="35"
+                    android:valueTo="65"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_reading_mode"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:background="?selectableItemBackground"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="36dp"
+                    android:src="@drawable/ic_baseline_import_contacts_24"
+                    android:layout_height="36dp"
+                    app:tint="?colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Mode fokus baca"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_status_reading_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Status: Tidak aktif"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_disable_tajweed"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:background="?selectableItemBackground"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Nonaktifkan Tajwid"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Nonaktifkan jika merasa terganggu"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_settings_disable_tajweed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+</ScrollView>

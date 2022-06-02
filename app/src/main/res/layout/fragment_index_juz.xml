@@ -8,6 +8,8 @@
     <com.l4digital.fastscroll.FastScrollRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
+        app:bubbleColor="?colorPrimary"
+        app:bubbleTextColor="?colorOnPrimary"
         app:bubbleSize="small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_index_juz"
