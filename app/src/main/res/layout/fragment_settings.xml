@@ -33,7 +33,6 @@
             android:background="?selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_margin="6dp"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
@@ -54,7 +53,7 @@
                     android:layout_height="match_parent">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:text="Dark Mode"
+                        android:text="@string/txt_dark_mode"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                         android:layout_height="wrap_content"/>
@@ -62,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
-                        android:text="Ubah tampilan jadi gelap"
+                        android:text="@string/txt_desc_darkmode_settings"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -84,7 +83,6 @@
             android:layout_width="match_parent"
             android:layout_margin="6dp"
             android:background="?selectableItemBackground"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
@@ -105,7 +103,7 @@
                     android:layout_height="match_parent">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:text="Ganti tema"
+                        android:text="@string/txt_ganti_tema"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                         android:layout_height="wrap_content"/>
@@ -113,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
-                        android:text="Sesuaikan warna aplikasi sesukamu"
+                        android:text="@string/txt_description_change_theme"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -141,7 +139,6 @@
             android:layout_width="match_parent"
             android:layout_margin="6dp"
             android:background="?selectableItemBackground"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
@@ -162,7 +159,7 @@
                     android:layout_height="match_parent">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:text="Bahasa"
+                        android:text="@string/txt_choose_lang"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                         android:layout_height="wrap_content"/>
@@ -170,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
-                        android:text="Atur bahasa untuk terjemah dan footnote"
+                        android:text="@string/txt_desc_lang"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -180,7 +177,6 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_margin="6dp"
-            style="@style/Widget.Material3.CardView.Filled"
             android:background="?selectableItemBackground"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -191,7 +187,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:drawableStart="@drawable/ic_baseline_text_fields_24"
-                    android:text="Ukuran teks per ayat"
+                    android:text="@string/txt_text_size_header"
                     android:drawableTint="?colorPrimary"
                     android:gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
@@ -220,7 +216,6 @@
             android:layout_width="match_parent"
             android:layout_margin="6dp"
             android:background="?selectableItemBackground"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
@@ -241,7 +236,7 @@
                     android:layout_height="match_parent">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:text="Mode fokus baca"
+                        android:text="@string/txt_focus_read_mode"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                         android:layout_height="wrap_content"/>
@@ -250,7 +245,6 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
-                        android:text="Status: Tidak aktif"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -262,22 +256,21 @@
             android:layout_width="match_parent"
             android:layout_margin="6dp"
             android:background="?selectableItemBackground"
-            style="@style/Widget.Material3.CardView.Filled"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
                 android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="130dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="2"
+                    android:layout_weight="5"
                     android:gravity="center_vertical|start"
                     android:layout_height="match_parent">
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:text="Nonaktifkan Tajwid"
+                        android:text="@string/txt_deactivate_tajweed"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                         android:layout_height="wrap_content"/>
@@ -285,13 +278,13 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
-                        android:text="Nonaktifkan jika merasa terganggu"
+                        android:text="@string/txt_desc_deactivate_tajweed"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="0"
                     android:layout_gravity="center"
                     android:gravity="end"
                     android:layout_height="wrap_content">

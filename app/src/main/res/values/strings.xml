@@ -16,4 +16,22 @@
     <string name="txt_slide_down_pls">Geser kebawah untuk memulai baca Quran</string>
     <string name="nav_read_fragment">Read Fragment</string>
     <string name="txt_english">English</string>
+    <string name="txt_status_activated">Status: Activated</string>
+    <string name="txt_status_deactivated">Status: Deactivated</string>
+    <string name="txt_activated">Activate</string>
+    <string name="txt_deactivated">Deactivate</string>
+    <string name="txt_question_read_mode">Activate focus read mode?</string>
+    <string name="txt_question_select_lang">Choose Language</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_dark_mode">Dark Mode</string>
+    <string name="txt_ganti_tema">Change Theme</string>
+    <string name="txt_description_change_theme">Customize app theme as you like</string>
+    <string name="txt_choose_lang">Language</string>
+    <string name="txt_desc_lang">Set language for translation and footnote</string>
+    <string name="txt_text_size_header">Text size per ayah</string>
+    <string name="txt_focus_read_mode">Focus Read Mode</string>
+    <string name="txt_deactivate_tajweed">Deactivate Tajweed</string>
+    <string name="txt_desc_deactivate_tajweed">Deactivate if tajwid bother your reading experience</string>
+    <string name="txt_desc_darkmode_settings">Change background to dark</string>
+    <string name="txt_play_all_ayah">Play All Ayah</string>
 </resources>

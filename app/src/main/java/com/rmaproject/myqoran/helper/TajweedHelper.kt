@@ -130,7 +130,6 @@ object TajweedHelper {
     private var colors: IntArray? = null
 
     fun getTajweed(context: Context?, s: String): Spannable {
-        val t2 = SystemClock.uptimeMillis()
         if (colors == null) {
             colors = IntArray(6)
             colors!![0] = ContextCompat.getColor(context!!, R.color.color_ghunna)

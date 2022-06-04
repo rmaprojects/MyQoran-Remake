@@ -2,9 +2,11 @@ package com.rmaproject.myqoran.ui.read
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -44,6 +46,9 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
             INDEX_BY_PAGE -> {
                 jumpToPosition = pageNumber
                 requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title = "Read Quran"
+                binding.viewPager.layoutDirection = View.LAYOUT_DIRECTION_RTL
+                binding.tabLayout.layoutDirection = View.LAYOUT_DIRECTION_RTL
+                binding.tabLayout.isVisible = false
             }
         }
 
@@ -60,8 +65,9 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
     ) {
         val quranDatabase = QuranDatabase.getInstance(requireContext())
         val quranDao = quranDatabase.quranDao()
-        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah)
+        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah, findNavController())
         binding.viewPager.adapter = adapter
+        binding.viewPager.isSaveEnabled = false
         TabLayoutMediator (binding.tabLayout, binding.viewPager) { tab, index ->
             when (indexType) {
                 INDEX_BY_SURAH -> {
@@ -84,7 +90,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
                 }
             }
         }.attach()
-        binding.viewPager.setCurrentItem(jumpToPosition-1, true)
+        binding.viewPager.currentItem = jumpToPosition-1
     }
 
     companion object {

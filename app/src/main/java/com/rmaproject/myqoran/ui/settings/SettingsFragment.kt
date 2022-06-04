@@ -1,6 +1,7 @@
 package com.rmaproject.myqoran.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -29,30 +30,43 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun focusReadViewConfiguration(preferences: SettingsPreferences) {
+
+        val choises = arrayOf(getString(R.string.txt_activated), getString(R.string.txt_deactivated))
+        val selected = when (preferences.isOnFocusRead) {
+            true -> 0
+            false -> 1
+        }
+
         binding.cardSettingsReadingMode.setOnClickListener {
+
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Aktifkan mode membaca?")
-                .setMessage("Mode membaca akan menghilangkan terjemahan, lanjut?\nKamu bisa mengubahnya lagi di pengaturan setelah ini")
-                .setPositiveButton("Ya") { _, _ ->
-                    preferences.isOnFocusReadMode = true
-                    binding.txtStatusReadingMode.text = "Status: Aktif"
+                .setTitle(getString(R.string.txt_question_read_mode))
+                .setSingleChoiceItems(choises, selected) { _, index ->
+                    when (index) {
+                        0 -> preferences.isOnFocusRead = true
+                        1 -> preferences.isOnFocusRead = false
+                    }
                 }
-                .setNegativeButton("Tidak") { _, _ ->
-                    preferences.isOnFocusReadMode = false
-                    binding.txtStatusReadingMode.text = "Status: Tidak Aktif"
+                .setPositiveButton("Ok") { _, _ ->
+                    binding.txtStatusReadingMode.text = when (preferences.isOnFocusRead) {
+                        true -> getString(R.string.txt_activated)
+                        false -> getString(R.string.txt_deactivated)
+                    }
                 }
+                .create()
                 .show()
         }
     }
 
     private fun languageViewConfiguration(preferences: SettingsPreferences) {
 
+        val listLang = arrayOf("Indonesia", getString(R.string.txt_english))
+
         binding.cardSettingsLanguage.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Pilih bahasa")
-                .setMessage("Bahasa yang dipilih akan diterapkan di terjemahan dan footnote")
+                .setTitle(getString(R.string.txt_question_select_lang))
                 .setSingleChoiceItems(
-                    arrayOf("Indonesia", getString(R.string.txt_english)),
+                    listLang,
                     preferences.languagePreference
                 ) { _, index ->
                     when (index) {
@@ -60,19 +74,22 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                         1 -> preferences.languagePreference = 1
                     }
                 }
+                .setNegativeButton(getString(R.string.txt_cancel)) { _, _ ->
+                }
+                .setPositiveButton("Ok") { _, _ ->
+                }
+                .create()
                 .show()
         }
     }
 
 
     private fun ayahTextSizeViewConfiguration(preferences: SettingsPreferences) {
-        binding.sliderSettingsAyahSize.addOnChangeListener { _, value, _ ->
-            preferences.ayahSizePreference = value
-        }
         binding.sliderSettingsAyahSize.addOnSliderTouchListener(object :
             Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
                 binding.txtSettingsAyahPreview.textSize = slider.value
+                preferences.ayahSizePreference = slider.value
             }
 
             override fun onStopTrackingTouch(slider: Slider) {
@@ -80,6 +97,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 preferences.ayahSizePreference = slider.value
             }
         })
+
+        binding.sliderSettingsAyahSize.addOnChangeListener { _, value, _ ->
+            preferences.ayahSizePreference = value
+            binding.txtSettingsAyahPreview.textSize = value
+        }
     }
 
     private fun initialisation(preferences: SettingsPreferences) {
@@ -87,9 +109,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.switchSettingsDisableTajweed.isChecked = preferences.showTajweed
         binding.sliderSettingsAyahSize.value = preferences.ayahSizePreference
         binding.txtSettingsAyahPreview.textSize = preferences.ayahSizePreference
-        binding.txtStatusReadingMode.text = when (preferences.isOnFocusReadMode) {
-            true -> "Status: Aktif"
-            false -> "Status: Tidak Aktif"
+        binding.txtStatusReadingMode.text = when (preferences.isOnFocusRead) {
+            false -> getString(R.string.txt_status_deactivated)
+            true -> getString(R.string.txt_status_activated)
         }
     }
 
