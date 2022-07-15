@@ -123,6 +123,8 @@
     <color name="recentReadColorDark">#ffdcb9</color>
     <color name="recentReadColorContainerLight">#ffdcb9</color>
     <color name="recentReadColorContainerDark">#693c00</color>
+    <color name="sholatSchedule">#a0f7a3</color>
+
 
     <!--  Tajweed  -->
     <color name="color_ghunna">#9c404b</color>

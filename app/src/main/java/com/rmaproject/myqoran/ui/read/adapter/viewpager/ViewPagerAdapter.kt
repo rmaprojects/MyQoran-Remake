@@ -37,7 +37,14 @@ class ViewPagerAdapter(
 
     override fun onBindViewHolder(holder: ViewPagerAdapterViewHolder, position: Int) {
         val context = holder.itemView.context
-        holder.bindView(indexType, context, position, viewLifecycleOwner, listTotalAyah, findNavController)
+        holder.bindView(
+            indexType,
+            context,
+            position,
+            viewLifecycleOwner,
+            listTotalAyah,
+            findNavController
+        )
     }
 
     override fun getItemCount() = totalIndex
@@ -52,7 +59,14 @@ class ViewPagerAdapter(
             listTotalAyah: List<Int>,
             findNavController: NavController
         ) {
-            setAdapter(indexType, context, position, viewLifecycleOwner, listTotalAyah, findNavController)
+            setAdapter(
+                indexType,
+                context,
+                position,
+                viewLifecycleOwner,
+                listTotalAyah,
+                findNavController
+            )
         }
 
         private fun setAdapter(
@@ -68,27 +82,42 @@ class ViewPagerAdapter(
                 ReadFragment.INDEX_BY_SURAH -> {
                     quranDao.readQuranBySurah(position + 1).asLiveData()
                         .observe(viewLifecycleOwner) { listQuranSurah ->
-                            val adapter = RecyclerViewReadQuranAdapter(listQuranSurah, listTotalAyah)
+                            val adapter = RecyclerViewReadQuranAdapter(
+                                listQuranSurah,
+                                listTotalAyah,
+                                indexType,
+                            )
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
                             showFootnotes(adapter, findNavController)
                         }
                 }
                 ReadFragment.INDEX_BY_JUZ -> {
                     quranDao.readQuranByJuz(position + 1).asLiveData()
                         .observe(viewLifecycleOwner) { listQuranJuz ->
-                            val adapter = RecyclerViewReadQuranAdapter(listQuranJuz, listTotalAyah)
+                            val adapter = RecyclerViewReadQuranAdapter(
+                                listQuranJuz,
+                                listTotalAyah,
+                                indexType,
+                            )
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
                             showFootnotes(adapter, findNavController)
                         }
                 }
                 ReadFragment.INDEX_BY_PAGE -> {
                     quranDao.readQuranByPage(position + 1).asLiveData()
                         .observe(viewLifecycleOwner) { listQuranPage ->
-                            val adapter = RecyclerViewReadQuranAdapter(listQuranPage, listTotalAyah)
+                            val adapter = RecyclerViewReadQuranAdapter(
+                                listQuranPage,
+                                listTotalAyah,
+                                indexType,
+                            )
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -101,7 +130,10 @@ class ViewPagerAdapter(
         ) {
             adapter.footNoteonClickListener = { footnote ->
                 val bundle = bundleOf(FootNotesBottomSheetFragment.RECEIVE_FOOTNOTE_KEY to footnote)
-                findNavController.navigate(R.id.action_nav_read_fragment_to_nav_bottom_sheet_footnotes, bundle)
+                findNavController.navigate(
+                    R.id.action_nav_read_fragment_to_nav_bottom_sheet_footnotes,
+                    bundle
+                )
             }
         }
     }

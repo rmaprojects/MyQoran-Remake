@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             ), drawerLayout
         )
 
-        
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_home -> {

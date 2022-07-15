@@ -38,7 +38,8 @@ class IndexBySurahFragment : Fragment(R.layout.fragment_index_surah) {
         adapter.callBackToRead = { surah, surahTotal ->
             val bundle = bundleOf(
                 ReadFragment.SURAH_NUMBER_KEY to surah.surahNumber,
-                ReadFragment.TOTAL_INDEX to surahTotal
+                ReadFragment.TOTAL_INDEX to surahTotal,
+                ReadFragment.TAB_POSITION to viewModel.getTabPosition()
             )
             findNavController().navigate(R.id.action_nav_home_to_nav_read_fragment, bundle)
         }

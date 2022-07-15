@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.dao.QuranDAO
 import com.rmaproject.myqoran.database.model.*
+import java.io.File
 
 @Database(
     entities = [Quran::class],

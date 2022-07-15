@@ -16,7 +16,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.R.attr.colorPrimary
 import com.google.android.material.color.MaterialColors
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.model.Quran
@@ -24,12 +23,14 @@ import com.rmaproject.myqoran.databinding.ItemReadQuranBinding
 import com.rmaproject.myqoran.helper.SnackbarHelper
 import com.rmaproject.myqoran.helper.TajweedHelper
 import com.rmaproject.myqoran.ui.read.adapter.recyclerview.RecyclerViewReadQuranAdapter.RecyclerViewReadQuranAdapterViewHolder
+import com.rmaproject.myqoran.ui.settings.preferences.RecentReadPreferences
 import com.rmaproject.myqoran.ui.settings.preferences.SettingsPreferences
 import java.util.regex.Pattern
 
 class RecyclerViewReadQuranAdapter(
     private val listQuran: List<Quran>,
-    private val listTotalAyah: List<Int>
+    private val listTotalAyah: List<Int>,
+    private val indexType: Int,
 ) : Adapter<RecyclerViewReadQuranAdapterViewHolder>() {
 
     var footNoteonClickListener: ((String) -> Unit)? = null
@@ -45,8 +46,21 @@ class RecyclerViewReadQuranAdapter(
         val quran = listQuran[position]
         val totalAyah = listTotalAyah[quran.surahNumber!! - 1]
         val context = holder.itemView.context
+        captureLastReadQuran(quran)
         holder.bindView(quran, totalAyah, context)
         holder.footNoteTracker(holder.itemView, quran, footNoteonClickListener, SettingsPreferences)
+    }
+
+    private fun captureLastReadQuran(quran:Quran) {
+        RecentReadPreferences.apply {
+            lastReadSurah = "${quran.surahNameEn}"
+            lastReadAyah = "${quran.ayahNumber}"
+            lastReadSurahNumber = quran.surahNumber?:1
+            lastReadJuzNumber = quran.juzNumber?:1
+            lastReadPageNumber = quran.page?:1
+            lastReadPosition = (quran.surahNumber?:0) -1
+            position = indexType
+        }
     }
 
     override fun getItemCount() = listQuran.size
@@ -85,10 +99,10 @@ class RecyclerViewReadQuranAdapter(
         private fun setViewClickListener(context: Context) {
             binding.apply {
                 btnPlayAllAyah.setOnClickListener {
-                    SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah))
+                    SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah), "Ok") {}
                 }
                 txtAyah.setOnLongClickListener {
-                    SnackbarHelper.showSnackbarShort(binding.root, "Long Click Ayah")
+                    SnackbarHelper.showSnackbarShort(binding.root, "Long Click Ayah", "Ok") {}
                     true
                 }
             }
@@ -112,7 +126,7 @@ class RecyclerViewReadQuranAdapter(
         }
 
         fun footNoteTracker(view: View, quran:Quran, footNoteonClickListener: ((String) -> Unit)?, preferences:SettingsPreferences) {
-            val colorPrimary = MaterialColors.getColor(view, colorPrimary)
+            val colorPrimary = MaterialColors.getColor(view, android.R.attr.colorPrimary)
             val translate = when (preferences.languagePreference) {
                 0 -> quran.translation_id
                 1 -> {

@@ -2,10 +2,10 @@ package com.rmaproject.myqoran.ui.read
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.appbar.MaterialToolbar
@@ -13,8 +13,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.QuranDatabase
 import com.rmaproject.myqoran.databinding.FragmentReadQuranBinding
+import com.rmaproject.myqoran.helper.changeToolbarTitle
 import com.rmaproject.myqoran.ui.read.adapter.viewpager.ViewPagerAdapter
 import com.rmaproject.myqoran.viewmodel.MainTabViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ReadFragment : Fragment(R.layout.fragment_read_quran) {
 
@@ -28,7 +31,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val surahNumber = arguments?.getInt(SURAH_NUMBER_KEY) ?: 0
         val juzNumber = arguments?.getInt(JUZ_NUMBER_KEY) ?: 0
         val pageNumber = arguments?.getInt(PAGE_NUMBER_KEY) ?: 0
-        val indexType = viewModel.getTabPosition()
+        val indexType = arguments?.getInt(TAB_POSITION)?: 0
 
         setHasOptionsMenu(true)
 
@@ -37,18 +40,16 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         when (indexType) {
             INDEX_BY_SURAH -> {
                 jumpToPosition = surahNumber
-                requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title = "Read Quran"
+                requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title = "Read by Surah"
+                changeToolbarTitle(R.id.toolbar, "Read by Surah")
             }
             INDEX_BY_JUZ -> {
                 jumpToPosition = juzNumber
-                requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title = "Read Quran"
+                changeToolbarTitle(R.id.toolbar, "Read by Juz")
             }
             INDEX_BY_PAGE -> {
                 jumpToPosition = pageNumber
-                requireActivity().findViewById<MaterialToolbar>(R.id.toolbar).title = "Read Quran"
-                binding.viewPager.layoutDirection = View.LAYOUT_DIRECTION_RTL
-                binding.tabLayout.layoutDirection = View.LAYOUT_DIRECTION_RTL
-                binding.tabLayout.isVisible = false
+                changeToolbarTitle(R.id.toolbar, "Read by Page")
             }
         }
 
@@ -90,7 +91,10 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
                 }
             }
         }.attach()
-        binding.viewPager.currentItem = jumpToPosition-1
+        lifecycleScope.launch {
+            delay(300)
+            binding.viewPager.currentItem = jumpToPosition-1
+        }
     }
 
     companion object {
@@ -101,5 +105,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         const val INDEX_BY_SURAH = 0
         const val INDEX_BY_JUZ = 1
         const val INDEX_BY_PAGE = 2
+        const val TAB_POSITION = "TABPOS"
+        const val LAST_READ_POSITION = "POSLASTREAD"
     }
 }
