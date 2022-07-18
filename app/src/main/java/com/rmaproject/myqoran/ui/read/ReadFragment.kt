@@ -32,6 +32,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val juzNumber = arguments?.getInt(JUZ_NUMBER_KEY) ?: 0
         val pageNumber = arguments?.getInt(PAGE_NUMBER_KEY) ?: 0
         val indexType = arguments?.getInt(TAB_POSITION)?: 0
+        val isFromHome = arguments?.getBoolean(IS_FROM_HOME_KEY)?:false
 
         setHasOptionsMenu(true)
 
@@ -54,7 +55,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         }
 
         viewModel.getTotalAyahList().observe(viewLifecycleOwner){ listTotalAyah ->
-            setViewPagerAdapter(jumpToPosition!!, indexType,  totalIndex, listTotalAyah)
+            setViewPagerAdapter(jumpToPosition!!, indexType,  totalIndex, listTotalAyah, isFromHome)
         }
     }
 
@@ -62,11 +63,12 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         jumpToPosition: Int,
         indexType: Int,
         totalIndex: Int,
-        listTotalAyah: List<Int>
+        listTotalAyah: List<Int>,
+        isFromHome:Boolean
     ) {
         val quranDatabase = QuranDatabase.getInstance(requireContext())
         val quranDao = quranDatabase.quranDao()
-        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah, findNavController())
+        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah, findNavController(), isFromHome, lifecycleScope)
         binding.viewPager.adapter = adapter
         binding.viewPager.isSaveEnabled = false
         TabLayoutMediator (binding.tabLayout, binding.viewPager) { tab, index ->
@@ -91,9 +93,12 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
                 }
             }
         }.attach()
-        lifecycleScope.launch {
-            delay(300)
-            binding.viewPager.currentItem = jumpToPosition-1
+
+        if (isFromHome) {
+            lifecycleScope.launch {
+                delay(300)
+                binding.viewPager.currentItem = jumpToPosition-1
+            }
         }
     }
 
@@ -107,5 +112,6 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         const val INDEX_BY_PAGE = 2
         const val TAB_POSITION = "TABPOS"
         const val LAST_READ_POSITION = "POSLASTREAD"
+        const val IS_FROM_HOME_KEY = "ISFROMHOMEVALUE"
     }
 }

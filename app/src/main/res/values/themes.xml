@@ -35,7 +35,6 @@
         <item name="colorBookmark">@color/bookmarkColor</item>
         <item name="colorRecentRead">@color/recentReadColor</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
-        <item name="topAppbarColor">#FFF</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Light.NoActionBar">
@@ -74,6 +73,5 @@
         <item name="colorBookmark">@color/bookmarkColor</item>
         <item name="colorRecentRead">@color/recentReadColor</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
-        <item name="topAppbarColor">#FFF</item>
     </style>
 </resources>

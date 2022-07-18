@@ -10,6 +10,7 @@ object SettingsPreferences : KotprefModel() {
     var isOnFocusRead by booleanPref(false)
     var showTajweed by booleanPref(true)
     var ayahSizePreference by floatPref(35F)
+    var isUsingLiveLocation by booleanPref(true)
 
     override fun clear() {
         super.clear()
@@ -19,5 +20,6 @@ object SettingsPreferences : KotprefModel() {
         isOnFocusRead = false
         showTajweed = true
         ayahSizePreference = 35F
+        isUsingLiveLocation = true
     }
 }

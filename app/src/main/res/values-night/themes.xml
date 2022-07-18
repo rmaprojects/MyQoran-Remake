@@ -33,7 +33,6 @@
         <item name="colorBookmark">@color/bookmarkColorDark</item>
         <item name="colorRecentRead">@color/recentReadColorDark</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
-        <item name="topAppbarColor">@color/md_theme_dark_primary_default</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Dark.NoActionBar">
@@ -70,6 +69,5 @@
         <item name="colorBookmark">@color/bookmarkColorDark</item>
         <item name="colorRecentRead">@color/recentReadColorDark</item>
         <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
-        <item name="topAppbarColor">@color/md_theme_dark_primary_blue</item>
     </style>
 </resources>

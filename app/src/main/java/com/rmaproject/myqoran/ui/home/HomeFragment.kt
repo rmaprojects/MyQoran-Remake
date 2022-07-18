@@ -51,18 +51,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             cardRecentRead.setOnClickListener {
                 goToLastReadPage()
             }
+            cardSholahSchedule.setOnClickListener {
+                goToSchedulePage()
+            }
         }
+    }
+
+    private fun goToSchedulePage() {
+        findNavController().navigate(R.id.action_nav_home_to_sholatScheduleFragment)
     }
 
     private fun goToLastReadPage() {
         val bundle:Bundle
+        val isFromHome = true
         when (RecentReadPreferences.position) {
             0 -> {
                 bundle = bundleOf(
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.SURAH_NUMBER_KEY to RecentReadPreferences.lastReadSurahNumber,
                     ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
-                    ReadFragment.TOTAL_INDEX to getTotalValues.totalSurahInQoran
+                    ReadFragment.TOTAL_INDEX to getTotalValues.totalSurahInQoran,
+                    ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )
                 findNavController().navigate(R.id.action_nav_home_to_nav_read_fragment, bundle)
             }
@@ -71,7 +80,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.JUZ_NUMBER_KEY to RecentReadPreferences.lastReadJuzNumber,
                     ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
-                    ReadFragment.TOTAL_INDEX to getTotalValues.totalJuzInQoran
+                    ReadFragment.TOTAL_INDEX to getTotalValues.totalJuzInQoran,
+                    ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )
                 findNavController().navigate(R.id.action_nav_home_to_nav_read_fragment, bundle)
             }
@@ -80,7 +90,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.PAGE_NUMBER_KEY to RecentReadPreferences.lastReadPageNumber,
                     ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
-                    ReadFragment.TOTAL_INDEX to getTotalValues.totalPageInQoran
+                    ReadFragment.TOTAL_INDEX to getTotalValues.totalPageInQoran,
+                    ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )
                 findNavController().navigate(R.id.action_nav_home_to_nav_read_fragment, bundle)
             }

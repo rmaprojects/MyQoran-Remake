@@ -115,10 +115,10 @@
     <color name="md_theme_dark_primaryInverse_blue">#006A65</color>
 
 
-    <color name="bookmarkContainerColorLight">#113559</color>
-    <color name="bookmarkContainerColorDark">#21a4de</color>
-    <color name="bookmarkColor">#bdc2ff</color>
-    <color name="bookmarkColorDark">#dfe0ff</color>
+    <color name="bookmarkContainerColorLight">#d6e3ff</color>
+    <color name="bookmarkContainerColorDark">#00468c</color>
+    <color name="bookmarkColor">#001b3d</color>
+    <color name="bookmarkColorDark">#d6e3ff</color>
     <color name="recentReadColor">#2c1600</color>
     <color name="recentReadColorDark">#ffdcb9</color>
     <color name="recentReadColorContainerLight">#ffdcb9</color>

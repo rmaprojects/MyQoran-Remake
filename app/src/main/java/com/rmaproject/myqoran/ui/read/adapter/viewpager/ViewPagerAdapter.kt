@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.asLiveData
 import androidx.navigation.NavController
@@ -19,13 +20,16 @@ import com.rmaproject.myqoran.ui.footnotes.FootNotesBottomSheetFragment
 import com.rmaproject.myqoran.ui.read.ReadFragment
 import com.rmaproject.myqoran.ui.read.adapter.recyclerview.RecyclerViewReadQuranAdapter
 import com.rmaproject.myqoran.ui.read.adapter.viewpager.ViewPagerAdapter.ViewPagerAdapterViewHolder
+import kotlinx.coroutines.launch
 
 class ViewPagerAdapter(
     private val totalIndex: Int,
     private val indexType: Int,
     private val viewLifecycleOwner: LifecycleOwner,
     private val listTotalAyah: List<Int>,
-    private val findNavController: NavController
+    private val findNavController: NavController,
+    private val isFromHome:Boolean,
+    private val lifecycleScope: LifecycleCoroutineScope
 ) : Adapter<ViewPagerAdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerAdapterViewHolder {
@@ -43,7 +47,9 @@ class ViewPagerAdapter(
             position,
             viewLifecycleOwner,
             listTotalAyah,
-            findNavController
+            findNavController,
+            isFromHome,
+            lifecycleScope
         )
     }
 
@@ -57,7 +63,9 @@ class ViewPagerAdapter(
             position: Int,
             viewLifecycleOwner: LifecycleOwner,
             listTotalAyah: List<Int>,
-            findNavController: NavController
+            findNavController: NavController,
+            isFromHome: Boolean,
+            lifecycleScope: LifecycleCoroutineScope
         ) {
             setAdapter(
                 indexType,
@@ -65,7 +73,9 @@ class ViewPagerAdapter(
                 position,
                 viewLifecycleOwner,
                 listTotalAyah,
-                findNavController
+                findNavController,
+                isFromHome,
+                lifecycleScope
             )
         }
 
@@ -75,7 +85,9 @@ class ViewPagerAdapter(
             position: Int,
             viewLifecycleOwner: LifecycleOwner,
             listTotalAyah: List<Int>,
-            findNavController: NavController
+            findNavController: NavController,
+            isFromHome: Boolean,
+            lifecycleScope: LifecycleCoroutineScope
         ) {
             val quranDao = QuranDatabase.getInstance(context).quranDao()
             when (indexType) {
@@ -89,6 +101,12 @@ class ViewPagerAdapter(
                             )
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
+                            if (isFromHome) {
+                                lifecycleScope.launch {
+                                    binding.recyclerView.scrollToPosition(position)
+                                }
+                            }
 
                             showFootnotes(adapter, findNavController)
                         }
@@ -104,6 +122,12 @@ class ViewPagerAdapter(
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
+                            if (isFromHome) {
+                                lifecycleScope.launch {
+                                    binding.recyclerView.scrollToPosition(position)
+                                }
+                            }
+
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -117,6 +141,12 @@ class ViewPagerAdapter(
                             )
                             binding.recyclerView.adapter = adapter
                             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
+                            if (isFromHome) {
+                                lifecycleScope.launch {
+                                    binding.recyclerView.scrollToPosition(position)
+                                }
+                            }
 
                             showFootnotes(adapter, findNavController)
                         }
