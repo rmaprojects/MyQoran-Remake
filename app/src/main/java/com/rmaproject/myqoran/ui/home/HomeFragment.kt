@@ -17,7 +17,10 @@ import com.rmaproject.myqoran.ui.home.adapter.viewpager.ViewPagerAdapter
 import com.rmaproject.myqoran.ui.read.ReadFragment
 import com.rmaproject.myqoran.ui.settings.preferences.RecentReadPreferences
 import com.rmaproject.myqoran.viewmodel.MainTabViewModel
+import com.rmaproject.myqoran.viewmodel.SholatScheduleViewModel
 import com.rmaproject.myqoran.viewmodel.ValuesViewModel
+import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -25,11 +28,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by viewBinding()
     private val viewModel: MainTabViewModel by activityViewModels()
     private val getTotalValues:ValuesViewModel by activityViewModels()
+    private val sholatScheduleViewModel:SholatScheduleViewModel by activityViewModels()
+    private lateinit var coroutineJob:Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(false)
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
         setAdapter(viewPagerAdapter)
         setButtonHeader()
@@ -53,6 +57,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             cardSholahSchedule.setOnClickListener {
                 goToSchedulePage()
+            }
+            coroutineJob = CoroutineScope(Dispatchers.Main).launch {
+                while (true) {
+                    val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date()).split(":")
+                    txtGapBetweenPrayerTimes.text = sholatScheduleViewModel.getGapBetweenTimes(currentTime)
+                    delay(1000)
+                }
             }
         }
     }
@@ -169,6 +180,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             else -> {
                 7
             }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (coroutineJob.isActive) {
+            coroutineJob.cancel()
         }
     }
 }
