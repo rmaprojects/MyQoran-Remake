@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.10486322188449848" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.1721014492753623" />
+        <entry key="app/src/main/res/layout/fragment_bookmark.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/fragment_bottomsheet_footnotes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
@@ -22,6 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_read_quran.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sholat_schedule.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/item_index.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_index_jozz.xml" value="0.26369426751592356" />
         <entry key="app/src/main/res/layout/item_index_juz.xml" value="0.29529243937232524" />
@@ -32,6 +34,8 @@
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/main.xml" value="0.215625" />
+        <entry key="app/src/main/res/menu/read_context_menu.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/menu/read_menu_context.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1245" />
         <entry key="app/src/main/res/xml/back_up_rules.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/xml/data_extraction_rules.xml" value="0.1721014492753623" />

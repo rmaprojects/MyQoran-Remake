@@ -122,7 +122,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun darkModeViewConfiguration(preferences: SettingsPreferences) {
-        binding.switchSettingsDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchSettingsDarkMode.setOnCheckedChangeListener { buttonView, _ ->
             if (buttonView.isChecked) {
                 preferences.isDarkMode = true
                 setDarkMode(preferences)

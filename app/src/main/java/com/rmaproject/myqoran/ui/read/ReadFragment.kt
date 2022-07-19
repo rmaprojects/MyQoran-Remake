@@ -34,8 +34,6 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val indexType = arguments?.getInt(TAB_POSITION)?: 0
         val isFromHome = arguments?.getBoolean(IS_FROM_HOME_KEY)?:false
 
-        setHasOptionsMenu(true)
-
         var jumpToPosition :Int? = 0
 
         when (indexType) {
@@ -94,11 +92,9 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
             }
         }.attach()
 
-        if (isFromHome) {
-            lifecycleScope.launch {
-                delay(300)
-                binding.viewPager.currentItem = jumpToPosition-1
-            }
+        lifecycleScope.launch {
+            delay(300)
+            binding.viewPager.currentItem = jumpToPosition-1
         }
     }
 
@@ -111,7 +107,6 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         const val INDEX_BY_JUZ = 1
         const val INDEX_BY_PAGE = 2
         const val TAB_POSITION = "TABPOS"
-        const val LAST_READ_POSITION = "POSLASTREAD"
         const val IS_FROM_HOME_KEY = "ISFROMHOMEVALUE"
     }
 }

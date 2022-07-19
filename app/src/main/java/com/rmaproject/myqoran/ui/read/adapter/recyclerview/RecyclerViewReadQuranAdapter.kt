@@ -1,6 +1,9 @@
 package com.rmaproject.myqoran.ui.read.adapter.recyclerview
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.snackbar.Snackbar
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.model.Quran
 import com.rmaproject.myqoran.databinding.ItemReadQuranBinding
@@ -25,6 +29,9 @@ import com.rmaproject.myqoran.helper.TajweedHelper
 import com.rmaproject.myqoran.ui.read.adapter.recyclerview.RecyclerViewReadQuranAdapter.RecyclerViewReadQuranAdapterViewHolder
 import com.rmaproject.myqoran.ui.settings.preferences.RecentReadPreferences
 import com.rmaproject.myqoran.ui.settings.preferences.SettingsPreferences
+import com.skydoves.powermenu.MenuAnimation.SHOWUP_TOP_RIGHT
+import com.skydoves.powermenu.PowerMenu
+import com.skydoves.powermenu.PowerMenuItem
 import java.util.regex.Pattern
 
 class RecyclerViewReadQuranAdapter(
@@ -46,30 +53,30 @@ class RecyclerViewReadQuranAdapter(
         val quran = listQuran[position]
         val totalAyah = listTotalAyah[quran.surahNumber!! - 1]
         val context = holder.itemView.context
-        captureLastReadQuran(quran)
+        captureLastReadQuran(quran, position)
         holder.bindView(quran, totalAyah, context)
         holder.footNoteTracker(holder.itemView, quran, footNoteonClickListener, SettingsPreferences)
     }
 
-    private fun captureLastReadQuran(quran:Quran) {
+    private fun captureLastReadQuran(quran:Quran, quranIndex:Int) {
         RecentReadPreferences.apply {
             lastReadSurah = "${quran.surahNameEn}"
             lastReadAyah = "${quran.ayahNumber}"
             lastReadSurahNumber = quran.surahNumber?:1
             lastReadJuzNumber = quran.juzNumber?:1
             lastReadPageNumber = quran.page?:1
-            lastReadPosition = (quran.surahNumber?:0) -1
+            lastReadPosition = quranIndex
             position = indexType
         }
     }
 
     override fun getItemCount() = listQuran.size
 
-    class RecyclerViewReadQuranAdapterViewHolder(view:View) : ViewHolder(view) {
+    class RecyclerViewReadQuranAdapterViewHolder(val view:View) : ViewHolder(view) {
         val binding:ItemReadQuranBinding by viewBinding()
         fun bindView(quran: Quran, totalAyah: Int, context:Context) {
             setTextViewValues(quran, totalAyah)
-            setViewClickListener(context)
+            setViewClickListener(context, quran, view)
             applySettingsPreferences(quran, context)
         }
 
@@ -81,29 +88,6 @@ class RecyclerViewReadQuranAdapter(
                 txtAyah.text = when (preferences.showTajweed) {
                     false -> applyTajweed(quran, context)
                     true -> reverseAyahNumber(quran)
-                }
-            }
-        }
-
-        private fun setTextViewValues(quran: Quran, totalAyah: Int) {
-            binding.apply {
-                headerSurahName.isVisible = quran.ayahNumber == 1
-                txtSurahNameEn.text = quran.surahNameEn
-                txtDescendPlace.text = quran.turunSurah
-                txtSurahNameAr.text = quran.surahNameAr
-                txtTotalAyah.text = "$totalAyah Ayah"
-                txtTranslate.text = quran.translation_id
-            }
-        }
-
-        private fun setViewClickListener(context: Context) {
-            binding.apply {
-                btnPlayAllAyah.setOnClickListener {
-                    SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah), "Ok") {}
-                }
-                txtAyah.setOnLongClickListener {
-                    SnackbarHelper.showSnackbarShort(binding.root, "Long Click Ayah", "Ok") {}
-                    true
                 }
             }
         }
@@ -163,5 +147,92 @@ class RecyclerViewReadQuranAdapter(
             binding.txtTranslate.movementMethod = LinkMovementMethod.getInstance()
             binding.txtTranslate.setText(spannable, TextView.BufferType.SPANNABLE)
         }
+
+        private fun setTextViewValues(quran: Quran, totalAyah: Int) {
+            binding.apply {
+                headerSurahName.isVisible = quran.ayahNumber == 1
+                txtSurahNameEn.text = quran.surahNameEn
+                txtDescendPlace.text = quran.turunSurah
+                txtSurahNameAr.text = quran.surahNameAr
+                txtTotalAyah.text = "$totalAyah Ayah"
+                txtTranslate.text = quran.translation_id
+            }
+        }
+
+        private fun setViewClickListener(context: Context, quran:Quran, view:View) {
+            binding.run {
+                btnPlayAllAyah.setOnClickListener {
+                    SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah), "Ok") {}
+                }
+                txtAyah.setOnLongClickListener {
+                    val powerMenu = PowerMenu.Builder(context)
+                    powerMenu.apply {
+                        setAnimation(SHOWUP_TOP_RIGHT)
+                        setMenuRadius(32F)
+                        setAutoDismiss(true)
+                        setMenuColor(MaterialColors.getColor(view, android.R.attr.colorBackground))
+                        setTextColor(MaterialColors.getColor(view, android.R.attr.colorPrimary))
+                        setIconColor(MaterialColors.getColor(view, android.R.attr.colorPrimary))
+                        setTextSize(18)
+                        setWidth(650)
+                        addItemList(getPowerItemList())
+                        setOnMenuItemClickListener { position, _ ->
+                            when (position) {
+                                PLAY_AYAH -> {
+
+                                }
+                                COPY_AYAH -> copyAyah(context, quran)
+                                SHARE_AYAH -> shareAyah(context, quran)
+                                BOOKMARK_AYAH -> {
+
+                                }
+                            }
+                        }.build().showAsAnchorRightBottom(txtAyah)
+                    }
+                    true
+                }
+            }
+        }
+
+        private fun getPowerItemList() : List<PowerMenuItem> {
+            return listOf(
+                PowerMenuItem("Putar Ayat", R.drawable.ic_baseline_play_circle_filled_24, false),
+                PowerMenuItem("Salin", R.drawable.ic_baseline_content_copy_24, false),
+                PowerMenuItem("Bagikan", R.drawable.ic_baseline_share_24, false),
+                PowerMenuItem("Bookmark", R.drawable.ic_baseline_bookmark_24, false),
+            )
+        }
+
+        private fun shareAyah(context: Context, quran: Quran) {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, quran.surahNameEn)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, quran.ayahText)
+            context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+        }
+
+        private fun copyAyah(context: Context, quran: Quran) {
+            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip:ClipData
+            when (SettingsPreferences.languagePreference) {
+                0 -> {
+                    clip = ClipData.newPlainText(quran.surahNameEn, "${quran.ayahText}\n\n${quran.translation_id}")
+                    clipboard.setPrimaryClip(clip)
+                }
+                1 -> {
+                    clip = ClipData.newPlainText(quran.surahNameEn, "${quran.ayahText}\n\n${quran.translation_en}")
+                    clipboard.setPrimaryClip(clip)
+                }
+            }
+            SnackbarHelper.showSnackbarShort(binding.root, "Ayat berhasil disalin", "Ok") {}
+        }
+
+        companion object {
+            private const val PLAY_AYAH = 0
+            private const val COPY_AYAH = 1
+            private const val SHARE_AYAH = 2
+            private const val BOOKMARK_AYAH = 3
+        }
+
     }
 }

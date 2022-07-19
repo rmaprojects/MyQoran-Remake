@@ -2,6 +2,8 @@ package com.rmaproject.myqoran.ui.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -80,7 +82,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 bundle = bundleOf(
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.SURAH_NUMBER_KEY to RecentReadPreferences.lastReadSurahNumber,
-                    ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
                     ReadFragment.TOTAL_INDEX to getTotalValues.totalSurahInQoran,
                     ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )
@@ -90,7 +91,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 bundle = bundleOf(
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.JUZ_NUMBER_KEY to RecentReadPreferences.lastReadJuzNumber,
-                    ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
                     ReadFragment.TOTAL_INDEX to getTotalValues.totalJuzInQoran,
                     ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )
@@ -100,7 +100,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 bundle = bundleOf(
                     ReadFragment.TAB_POSITION to RecentReadPreferences.position,
                     ReadFragment.PAGE_NUMBER_KEY to RecentReadPreferences.lastReadPageNumber,
-                    ReadFragment.LAST_READ_POSITION to RecentReadPreferences.lastReadPosition,
                     ReadFragment.TOTAL_INDEX to getTotalValues.totalPageInQoran,
                     ReadFragment.IS_FROM_HOME_KEY to isFromHome
                 )

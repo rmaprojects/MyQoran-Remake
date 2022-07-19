@@ -20,6 +20,8 @@ import com.rmaproject.myqoran.ui.footnotes.FootNotesBottomSheetFragment
 import com.rmaproject.myqoran.ui.read.ReadFragment
 import com.rmaproject.myqoran.ui.read.adapter.recyclerview.RecyclerViewReadQuranAdapter
 import com.rmaproject.myqoran.ui.read.adapter.viewpager.ViewPagerAdapter.ViewPagerAdapterViewHolder
+import com.rmaproject.myqoran.ui.settings.preferences.RecentReadPreferences
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ViewPagerAdapter(
@@ -90,6 +92,7 @@ class ViewPagerAdapter(
             lifecycleScope: LifecycleCoroutineScope
         ) {
             val quranDao = QuranDatabase.getInstance(context).quranDao()
+            val lastReadPosition = RecentReadPreferences.lastReadPosition
             when (indexType) {
                 ReadFragment.INDEX_BY_SURAH -> {
                     quranDao.readQuranBySurah(position + 1).asLiveData()
@@ -104,7 +107,8 @@ class ViewPagerAdapter(
 
                             if (isFromHome) {
                                 lifecycleScope.launch {
-                                    binding.recyclerView.scrollToPosition(position)
+                                    delay(1000)
+                                    binding.recyclerView.scrollToPosition(lastReadPosition)
                                 }
                             }
 
@@ -124,7 +128,8 @@ class ViewPagerAdapter(
 
                             if (isFromHome) {
                                 lifecycleScope.launch {
-                                    binding.recyclerView.scrollToPosition(position)
+                                    delay(1000)
+                                    binding.recyclerView.scrollToPosition(lastReadPosition)
                                 }
                             }
 
@@ -144,7 +149,8 @@ class ViewPagerAdapter(
 
                             if (isFromHome) {
                                 lifecycleScope.launch {
-                                    binding.recyclerView.scrollToPosition(position)
+                                    delay(300)
+                                    binding.recyclerView.scrollToPosition(lastReadPosition)
                                 }
                             }
 

@@ -1,6 +1,5 @@
 package com.rmaproject.myqoran.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +13,7 @@ class SholatScheduleViewModel : ViewModel() {
 
     fun getGapBetweenTimes(currentTime: List<String>): String {
         val convertedCurrentTime = getCalendarTime(currentTime)
-        val shubuhState = shubuhTime?.let { time -> getCurrentState(convertedCurrentTime, time) }
+        val shubuhState = shubuhTime?.let { time -> getShubuhState(convertedCurrentTime, time) }
         val dzuhurState = dzuhurTime?.let { time -> getCurrentState(convertedCurrentTime, time) }
         val asharState = asharTime?.let { time -> getCurrentState(convertedCurrentTime, time) }
         val maghribState = maghribTime?.let { time -> getCurrentState(convertedCurrentTime, time) }
@@ -43,6 +42,10 @@ class SholatScheduleViewModel : ViewModel() {
     }
 
     private fun gapCounter(convertedCurrentTime: Calendar, convertedPrayerTime: Calendar) : String {
+        val convertedIsyaTime = getCalendarTime(isyaTime!!.split(":"))
+        if (convertedCurrentTime.timeInMillis > convertedIsyaTime.timeInMillis) {
+            convertedPrayerTime.add(Calendar.DATE, 1)
+        }
         val currentTime = Date(convertedCurrentTime.timeInMillis)
         val prayerTime = Date(convertedPrayerTime.timeInMillis)
         val countGap = prayerTime.time - currentTime.time
@@ -52,6 +55,16 @@ class SholatScheduleViewModel : ViewModel() {
             hour > 0 -> "$hour jam $minute menit"
             else -> "$minute menit"
         }
+    }
+
+    private fun getShubuhState(convertedCurrentTime: Calendar, prayerTime: String) : Boolean {
+        val convertedPrayerTime = getCalendarTime(prayerTime.split(":"))
+        val convertedIsyaTime = getCalendarTime(isyaTime!!.split(":"))
+        if (convertedCurrentTime.timeInMillis > convertedIsyaTime.timeInMillis) {
+            convertedPrayerTime.add(Calendar.DATE, 1)
+        }
+
+        return convertedCurrentTime.timeInMillis < convertedPrayerTime.timeInMillis
     }
 
     private fun getCalendarTime(splittedTime:List<String>?): Calendar {
@@ -71,6 +84,6 @@ class SholatScheduleViewModel : ViewModel() {
 
     private fun getCurrentState(convertedCurrentTime: Calendar, prayerTime: String): Boolean {
         val convertedPrayerTime = getCalendarTime(prayerTime.split(":"))
-        return (convertedPrayerTime.timeInMillis > convertedCurrentTime.timeInMillis)
+        return convertedPrayerTime.timeInMillis > convertedCurrentTime.timeInMillis
     }
 }
