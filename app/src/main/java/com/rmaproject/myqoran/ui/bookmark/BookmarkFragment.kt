@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,11 +22,13 @@ import com.rmaproject.myqoran.helper.SnackbarHelper
 import com.rmaproject.myqoran.ui.bookmark.adapter.BookmarkRecylerViewAdapter
 import com.rmaproject.myqoran.ui.bookmark.adapter.listener.SwipeToDeleteListener
 import com.rmaproject.myqoran.ui.read.ReadFragment
+import com.rmaproject.myqoran.viewmodel.ValuesViewModel
 import kotlinx.coroutines.launch
 
 class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
 
     private val binding : FragmentBookmarkBinding by viewBinding()
+    private val valuesViewModel:ValuesViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +59,8 @@ class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
             ReadFragment.IS_FROM_BOOKMARK_KEY to true,
             ReadFragment.SURAH_NUMBER_KEY to bookmark.surahNumber,
             ReadFragment.TAB_POSITION to ReadFragment.INDEX_BY_SURAH,
-            ReadFragment.BOOKMARK_AYAH_NUMBER_KEY to bookmark.ayatNumber
+            ReadFragment.BOOKMARK_AYAH_NUMBER_KEY to bookmark.ayatNumber,
+            ReadFragment.TOTAL_INDEX to valuesViewModel.totalSurahInQoran
         )
         findNavController().navigate(R.id.action_bookmarkFragment_to_nav_read_fragment, bundle)
     }

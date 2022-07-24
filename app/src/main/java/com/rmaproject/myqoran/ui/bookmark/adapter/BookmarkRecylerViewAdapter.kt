@@ -37,7 +37,7 @@ class BookmarkRecylerViewAdapter(private val bookmarks:List<Bookmark>) : Recycle
         fun bindView(bookmark: Bookmark, position: Int) {
             binding.run {
                 txtArabicText.text = bookmark.textQuran
-                txtAyahPositionBookmark.text = bookmark.ayatNumber.toString()
+                txtAyahPositionBookmark.text = "Ayat ${bookmark.ayatNumber}"
                 txtDateAdded.text = bookmark.timeStamp
                 txtSurahNameBookmark.text = bookmark.surahName
                 txtIndexBookmark.text = (position + 1).toString()

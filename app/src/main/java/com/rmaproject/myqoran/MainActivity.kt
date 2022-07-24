@@ -45,7 +45,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (isLocationEnabled(this)) {
             airLocation.start()
         } else {
+            val longitude = locationViewModel.getLongitude()
+            val latitude = locationViewModel.getLatitude()
+            val api = ApiInterface.createApi()
             SnackbarHelper.showSnackbarShort(binding.root, "Akses lokasi dinonaktifkan,\nberalih ke lokasi default", "Ok") {}
+            fetchApi(longitude, latitude, api)
         }
     }
 
