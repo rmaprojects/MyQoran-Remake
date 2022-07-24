@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.snackbar.Snackbar
 import com.rmaproject.myqoran.R
+import com.rmaproject.myqoran.database.model.Bookmark
 import com.rmaproject.myqoran.database.model.Quran
 import com.rmaproject.myqoran.databinding.ItemReadQuranBinding
 import com.rmaproject.myqoran.helper.SnackbarHelper
@@ -32,6 +32,8 @@ import com.rmaproject.myqoran.ui.settings.preferences.SettingsPreferences
 import com.skydoves.powermenu.MenuAnimation.SHOWUP_TOP_RIGHT
 import com.skydoves.powermenu.PowerMenu
 import com.skydoves.powermenu.PowerMenuItem
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 class RecyclerViewReadQuranAdapter(
@@ -41,6 +43,7 @@ class RecyclerViewReadQuranAdapter(
 ) : Adapter<RecyclerViewReadQuranAdapterViewHolder>() {
 
     var footNoteonClickListener: ((String) -> Unit)? = null
+    var addBookmarkClickListener:((Bookmark) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -54,7 +57,7 @@ class RecyclerViewReadQuranAdapter(
         val totalAyah = listTotalAyah[quran.surahNumber!! - 1]
         val context = holder.itemView.context
         captureLastReadQuran(quran, position)
-        holder.bindView(quran, totalAyah, context)
+        holder.bindView(quran, totalAyah, context, addBookmarkClickListener)
         holder.footNoteTracker(holder.itemView, quran, footNoteonClickListener, SettingsPreferences)
     }
 
@@ -74,9 +77,14 @@ class RecyclerViewReadQuranAdapter(
 
     class RecyclerViewReadQuranAdapterViewHolder(val view:View) : ViewHolder(view) {
         val binding:ItemReadQuranBinding by viewBinding()
-        fun bindView(quran: Quran, totalAyah: Int, context:Context) {
+        fun bindView(
+            quran: Quran,
+            totalAyah: Int,
+            context: Context,
+            addBookmarkClickListener: ((Bookmark) -> Unit)?
+        ) {
             setTextViewValues(quran, totalAyah)
-            setViewClickListener(context, quran, view)
+            setViewClickListener(context, quran, view, addBookmarkClickListener)
             applySettingsPreferences(quran, context)
         }
 
@@ -159,7 +167,12 @@ class RecyclerViewReadQuranAdapter(
             }
         }
 
-        private fun setViewClickListener(context: Context, quran:Quran, view:View) {
+        private fun setViewClickListener(
+            context: Context,
+            quran: Quran,
+            view: View,
+            addBookmarkClickListener: ((Bookmark) -> Unit)?
+        ) {
             binding.run {
                 btnPlayAllAyah.setOnClickListener {
                     SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah), "Ok") {}
@@ -178,17 +191,13 @@ class RecyclerViewReadQuranAdapter(
                         addItemList(getPowerItemList())
                         setOnMenuItemClickListener { position, _ ->
                             when (position) {
-                                PLAY_AYAH -> {
-
-                                }
+                                PLAY_AYAH -> playAyah(context, quran)
                                 COPY_AYAH -> copyAyah(context, quran)
                                 SHARE_AYAH -> shareAyah(context, quran)
-                                BOOKMARK_AYAH -> {
-
-                                }
+                                BOOKMARK_AYAH -> insertBookmark(quran, position, addBookmarkClickListener)
                             }
-                        }.build().showAsAnchorRightBottom(txtAyah)
-                    }
+                        }
+                    }.build().showAsDropDown(txtAyah)
                     true
                 }
             }
@@ -225,6 +234,21 @@ class RecyclerViewReadQuranAdapter(
                 }
             }
             SnackbarHelper.showSnackbarShort(binding.root, "Ayat berhasil disalin", "Ok") {}
+        }
+
+        private fun insertBookmark(
+            quran: Quran,
+            position: Int,
+            addBookmarkClickListener: ((Bookmark) -> Unit)?
+        ) {
+            val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val bookmark = Bookmark(null, quran.surahNameEn, quran.ayahNumber, quran.surahNumber,position, quran.ayahText, currentDate, Date().time)
+            addBookmarkClickListener?.invoke(bookmark)
+            SnackbarHelper.showSnackbarShort(binding.root, "Surat ${quran.surahNameEn}: ${quran.ayahNumber} berhasil ditambahkan ke bookmark", "Ok") {}
+        }
+
+        private fun playAyah(context: Context, quran: Quran) {
+
         }
 
         companion object {

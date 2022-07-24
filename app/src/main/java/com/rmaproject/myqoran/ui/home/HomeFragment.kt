@@ -2,18 +2,19 @@ package com.rmaproject.myqoran.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rmaproject.myqoran.R
+import com.rmaproject.myqoran.database.BookmarkDatabase
 import com.rmaproject.myqoran.databinding.FragmentHomeBinding
 import com.rmaproject.myqoran.ui.home.adapter.viewpager.ViewPagerAdapter
 import com.rmaproject.myqoran.ui.read.ReadFragment
@@ -40,18 +41,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setAdapter(viewPagerAdapter)
         setButtonHeader()
         setHijriDate()
-
-        Log.d("recentsurahnumber", RecentReadPreferences.lastReadSurahNumber.toString())
-        Log.d("recentjuznumber", RecentReadPreferences.lastReadJuzNumber.toString())
-        Log.d("recentpage", RecentReadPreferences.lastReadPageNumber.toString())
-
-        Log.d("lastpos", RecentReadPreferences.lastReadPosition.toString())
-        Log.d("index by", RecentReadPreferences.position.toString())
     }
 
     private fun setButtonHeader() {
         val recentReadSurahName = RecentReadPreferences.lastReadSurah
         val recentReadAyahNumber = RecentReadPreferences.lastReadAyah
+        val db = BookmarkDatabase.getInstance(requireContext())
+        val dao = db.bookmarkDao()
+
         binding.run {
             txtRecentRead.text = "$recentReadSurahName: $recentReadAyahNumber"
             cardRecentRead.setOnClickListener {
@@ -59,6 +56,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             cardSholahSchedule.setOnClickListener {
                 goToSchedulePage()
+            }
+            cardBookmark.setOnClickListener {
+                goToBookmarkPage()
+            }
+            dao.getBookmarks().asLiveData().observe(viewLifecycleOwner) { bookmarks ->
+                txtBookmarkTotal.text = "Total Bookmark: ${bookmarks.size}"
             }
             coroutineJob = CoroutineScope(Dispatchers.Main).launch {
                 while (true) {
@@ -70,8 +73,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private fun setAdapter(adapter: ViewPagerAdapter) {
+        binding.viewPager.adapter = adapter
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setTabPosition(position)
+                Log.d("page selected:", viewModel.getTabPosition().toString())
+            }
+        })
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Surah"
+                1 -> "Juz"
+                2 -> "Page"
+                else -> "Unknown"
+            }
+        }.attach()
+    }
+
     private fun goToSchedulePage() {
         findNavController().navigate(R.id.action_nav_home_to_sholatScheduleFragment)
+    }
+
+    private fun goToBookmarkPage() {
+        findNavController().navigate(R.id.action_nav_home_to_bookmarkFragment)
     }
 
     private fun goToLastReadPage() {
@@ -131,26 +158,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 )
             } ${cal[Calendar.YEAR]}"
         binding.hijriDateTxt.text = tanggalanHijriyyah
-    }
-
-    private fun setAdapter(adapter: ViewPagerAdapter) {
-        binding.viewPager.adapter = adapter
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                viewModel.setTabPosition(position)
-                Log.d("page selected:", viewModel.getTabPosition().toString())
-            }
-        })
-
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Surah"
-                1 -> "Juz"
-                2 -> "Page"
-                else -> "Unknown"
-            }
-        }.attach()
     }
 
     private fun converDayToID(hijriDate: String?): Int {

@@ -1,6 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/clickable_card_bookmark"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="135dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="4dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:src="@drawable/ic_baseline_dot_1_24"
+                        android:layout_height="64dp"
+                        android:layout_centerInParent="true"
+                        app:tint="?colorPrimary" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_index_bookmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="1"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                        android:textColor="?colorOnPrimary" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_surah_name_bookmark"
+                        android:layout_width="wrap_content"
+                        android:text="Surat Al-Fatihah"
+                        android:layout_margin="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_ayah_position_bookmark"
+                        android:layout_width="wrap_content"
+                        android:text="Ayat 1"
+                        android:layout_marginHorizontal="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="4"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Date Added:"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_gravity="end"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_date_added"
+                        android:layout_width="wrap_content"
+                        android:text="2022/02/01"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_gravity="end"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_arabic_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Arabic text here"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+            </RelativeLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_home_to_sholatScheduleFragment"
             app:destination="@id/sholatScheduleFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_bookmarkFragment"
+            app:destination="@id/bookmarkFragment" />
     </fragment>
 
     <fragment
@@ -47,5 +50,14 @@
         android:id="@+id/sholatScheduleFragment"
         tools:layout="@layout/fragment_sholat_schedule"
         android:name="com.rmaproject.myqoran.ui.sholat.SholatScheduleFragment"
-        android:label="Jadwal Sholat" />
+        android:label="@string/txt_sholat_schedule" />
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        tools:layout="@layout/fragment_bookmark"
+        android:name="com.rmaproject.myqoran.ui.bookmark.BookmarkFragment"
+        android:label="Bookmark" >
+        <action
+            android:id="@+id/action_bookmarkFragment_to_nav_read_fragment"
+            app:destination="@id/nav_read_fragment" />
+    </fragment>
 </navigation>

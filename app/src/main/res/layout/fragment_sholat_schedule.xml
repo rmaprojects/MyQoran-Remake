@@ -14,9 +14,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="13:00:00"
+            android:text="-:-:-:-"
             android:textAppearance="@style/TextAppearance.Material3.DisplayMedium"
             android:textColor="?colorPrimary" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_current_location"
+            android:layout_width="wrap_content"
+            android:text="Lokasi anda"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txt_current_clock"
+            android:layout_height="wrap_content"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_prediction_next_sholat"

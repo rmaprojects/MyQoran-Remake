@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rmaproject.myqoran.R
+import com.rmaproject.myqoran.database.BookmarkDatabase
 import com.rmaproject.myqoran.database.QuranDatabase
 import com.rmaproject.myqoran.databinding.ItemPageReadQuranBinding
 import com.rmaproject.myqoran.ui.footnotes.FootNotesBottomSheetFragment
@@ -30,8 +31,10 @@ class ViewPagerAdapter(
     private val viewLifecycleOwner: LifecycleOwner,
     private val listTotalAyah: List<Int>,
     private val findNavController: NavController,
-    private val isFromHome:Boolean,
-    private val lifecycleScope: LifecycleCoroutineScope
+    private val isFromHome: Boolean,
+    private val lifecycleScope: LifecycleCoroutineScope,
+    private val isFromBookmark: Boolean,
+    private val bookmarkAyahNumber: Int
 ) : Adapter<ViewPagerAdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerAdapterViewHolder {
@@ -51,7 +54,9 @@ class ViewPagerAdapter(
             listTotalAyah,
             findNavController,
             isFromHome,
-            lifecycleScope
+            lifecycleScope,
+            isFromBookmark,
+            bookmarkAyahNumber
         )
     }
 
@@ -67,7 +72,9 @@ class ViewPagerAdapter(
             listTotalAyah: List<Int>,
             findNavController: NavController,
             isFromHome: Boolean,
-            lifecycleScope: LifecycleCoroutineScope
+            lifecycleScope: LifecycleCoroutineScope,
+            isFromBookmark: Boolean,
+            bookmarkAyahNumber: Int
         ) {
             setAdapter(
                 indexType,
@@ -77,7 +84,9 @@ class ViewPagerAdapter(
                 listTotalAyah,
                 findNavController,
                 isFromHome,
-                lifecycleScope
+                lifecycleScope,
+                isFromBookmark,
+                bookmarkAyahNumber
             )
         }
 
@@ -89,7 +98,9 @@ class ViewPagerAdapter(
             listTotalAyah: List<Int>,
             findNavController: NavController,
             isFromHome: Boolean,
-            lifecycleScope: LifecycleCoroutineScope
+            lifecycleScope: LifecycleCoroutineScope,
+            isFromBookmark: Boolean,
+            bookmarkAyahNumber: Int
         ) {
             val quranDao = QuranDatabase.getInstance(context).quranDao()
             val lastReadPosition = RecentReadPreferences.lastReadPosition
@@ -109,6 +120,21 @@ class ViewPagerAdapter(
                                 lifecycleScope.launch {
                                     delay(1000)
                                     binding.recyclerView.scrollToPosition(lastReadPosition)
+                                }
+                            }
+
+                            if (isFromBookmark) {
+                                lifecycleScope.launch {
+                                    delay(1000)
+                                    binding.recyclerView.scrollToPosition(bookmarkAyahNumber)
+                                }
+                            }
+
+                            adapter.addBookmarkClickListener =  { bookmark ->
+                                val database = BookmarkDatabase.getInstance(context)
+                                val dao = database.bookmarkDao()
+                                lifecycleScope.launch {
+                                    dao.insertBookmark(bookmark)
                                 }
                             }
 
@@ -133,6 +159,14 @@ class ViewPagerAdapter(
                                 }
                             }
 
+                            adapter.addBookmarkClickListener =  { bookmark ->
+                                val database = BookmarkDatabase.getInstance(context)
+                                val dao = database.bookmarkDao()
+                                lifecycleScope.launch {
+                                    dao.insertBookmark(bookmark)
+                                }
+                            }
+
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -151,6 +185,14 @@ class ViewPagerAdapter(
                                 lifecycleScope.launch {
                                     delay(300)
                                     binding.recyclerView.scrollToPosition(lastReadPosition)
+                                }
+                            }
+
+                            adapter.addBookmarkClickListener =  { bookmark ->
+                                val database = BookmarkDatabase.getInstance(context)
+                                val dao = database.bookmarkDao()
+                                lifecycleScope.launch {
+                                    dao.insertBookmark(bookmark)
                                 }
                             }
 

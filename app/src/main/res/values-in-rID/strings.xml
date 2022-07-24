@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="txt_sholat_schedule">Jadwal Sholat</string>
+    <string name="navigation_drawer_open">Buka menu samping</string>
+    <string name="navigation_drawer_close">Tutup menu samping</string>
+    <string name="nav_header_desc">Bagian atas navigasi</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="menu_about">Tentang</string>
+    <string name="txt_recent_read">Barusan dibaca</string>
+    <string name="txt_slide_down_pls">Geser kebawah untuk mulai membaca Quran</string>
+    <string name="nav_read_fragment">Baca Quran</string>
+    <string name="txt_english">Inggris</string>
+    <string name="txt_status_activated">Status: Aktif</string>
+    <string name="txt_status_deactivated">Status: Tidak aktif</string>
+    <string name="txt_activated">Aktifkan</string>
+    <string name="txt_deactivated">Matikan</string>
+    <string name="txt_question_read_mode">Aktifkan mode fokus membaca?</string>
+    <string name="txt_question_select_lang">Pilih Bahasa</string>
+    <string name="txt_cancel">Batal</string>
+    <string name="txt_dark_mode">Mode Gelap</string>
+    <string name="txt_ganti_tema">Ganti tema</string>
+    <string name="txt_description_change_theme">Ganti tema sesukamu</string>
+    <string name="txt_choose_lang">Bahasa</string>
+    <string name="txt_desc_lang">Atur bahasa untuk terjemah dan footnote</string>
+    <string name="txt_text_size_header">Ukuran teks per ayat</string>
+    <string name="txt_focus_read_mode">Mode fokus baca</string>
+    <string name="txt_deactivate_tajweed">Matikan tajwid</string>
+    <string name="txt_desc_deactivate_tajweed">Matikan tajwid jika mengganggu</string>
+    <string name="txt_desc_darkmode_settings">Ganti latar belakang jadi gelap</string>
+    <string name="txt_play_all_ayah">Putar semua ayat</string>
+    <string name="txt_bookmark_empty">Kamu belum menambahkan bookmark apapun</string>
+    <string name="txt_bookmark_removed">Bookmark Dihapus</string>
+</resources>

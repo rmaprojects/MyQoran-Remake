@@ -1,5 +1,6 @@
 package com.rmaproject.myqoran.ui.sholat
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +11,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.api.ApiInterface
 import com.rmaproject.myqoran.databinding.FragmentSholatScheduleBinding
-import com.rmaproject.myqoran.ui.home.HomeFragment
 import com.rmaproject.myqoran.viewmodel.LocationViewModel
 import com.rmaproject.myqoran.viewmodel.SholatScheduleViewModel
 import kotlinx.coroutines.*
@@ -75,12 +75,18 @@ class SholatScheduleFragment : Fragment(R.layout.fragment_sholat_schedule) {
     }
 
     private fun applyBindings() {
+        val geoCoder = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(locationViewModel.getLatitude(), locationViewModel.getLongitude(), 1)
+        val locality = geoCoder[0].locality
+        val subLocality = geoCoder[0].subLocality
+        val subAdminArea = geoCoder[0].subAdminArea
+        val address = "$locality, $subLocality, $subAdminArea"
         binding.apply {
             txtShubuhClock.text = sholatScheduleViewModel.shubuhTime
             txtDzuhurClock.text = sholatScheduleViewModel.dzuhurTime
             txtAsharClock.text = sholatScheduleViewModel.asharTime
             txtMaghribClock.text = sholatScheduleViewModel.maghribTime
             txtIsyaClock.text = sholatScheduleViewModel.isyaTime
+            txtCurrentLocation.text = address
         }
     }
 

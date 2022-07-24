@@ -33,8 +33,10 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val pageNumber = arguments?.getInt(PAGE_NUMBER_KEY) ?: 0
         val indexType = arguments?.getInt(TAB_POSITION)?: 0
         val isFromHome = arguments?.getBoolean(IS_FROM_HOME_KEY)?:false
+        val isFromBookmark = arguments?.getBoolean(IS_FROM_BOOKMARK_KEY)?:false
+        val bookmarkAyahNumber = arguments?.getInt(BOOKMARK_AYAH_NUMBER_KEY)?: 0
 
-        var jumpToPosition :Int? = 0
+        var jumpToPosition = 0
 
         when (indexType) {
             INDEX_BY_SURAH -> {
@@ -53,7 +55,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         }
 
         viewModel.getTotalAyahList().observe(viewLifecycleOwner){ listTotalAyah ->
-            setViewPagerAdapter(jumpToPosition!!, indexType,  totalIndex, listTotalAyah, isFromHome)
+            setViewPagerAdapter(jumpToPosition, indexType,  totalIndex, listTotalAyah, isFromHome, isFromBookmark, bookmarkAyahNumber)
         }
     }
 
@@ -62,11 +64,13 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         indexType: Int,
         totalIndex: Int,
         listTotalAyah: List<Int>,
-        isFromHome:Boolean
+        isFromHome: Boolean,
+        isFromBookmark: Boolean,
+        bookmarkAyahNumber: Int
     ) {
         val quranDatabase = QuranDatabase.getInstance(requireContext())
         val quranDao = quranDatabase.quranDao()
-        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah, findNavController(), isFromHome, lifecycleScope)
+        val adapter = ViewPagerAdapter(totalIndex, indexType, viewLifecycleOwner, listTotalAyah, findNavController(), isFromHome, lifecycleScope, isFromBookmark, bookmarkAyahNumber)
         binding.viewPager.adapter = adapter
         binding.viewPager.isSaveEnabled = false
         TabLayoutMediator (binding.tabLayout, binding.viewPager) { tab, index ->
@@ -108,5 +112,7 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         const val INDEX_BY_PAGE = 2
         const val TAB_POSITION = "TABPOS"
         const val IS_FROM_HOME_KEY = "ISFROMHOMEVALUE"
+        const val IS_FROM_BOOKMARK_KEY = "ISFROMBOOKMARKVALUE"
+        const val BOOKMARK_AYAH_NUMBER_KEY = "BOOKMARKAYAHNUMBERVALUE"
     }
 }
