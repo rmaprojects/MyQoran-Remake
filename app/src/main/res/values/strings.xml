@@ -35,4 +35,6 @@
     <string name="txt_sholat_schedule">Sholat Schedule</string>
     <string name="txt_bookmark_empty">You haven\'t added some bookmarks</string>
     <string name="txt_bookmark_removed">Bookmark Removed</string>
+    <string name="txt_display">Display</string>
+    <string name="txt_read_settings">Reading Settings</string>
 </resources>

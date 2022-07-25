@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:padding="8dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_surah_name_en"
                 android:layout_width="wrap_content"
@@ -48,30 +48,31 @@
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
+                android:layout_height="match_parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_surah_name_ar"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginVertical="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/usmani_font"
                     android:gravity="center_horizontal"
                     android:text="الفَاتِحة"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_play_all_ayah"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/txt_play_all_ayah"
-                    app:elevation="12dp"
-                    app:icon="@drawable/ic_baseline_play_circle_filled_24"
-                    app:iconGravity="textStart" />
             </RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_play_all_ayah"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="@string/txt_play_all_ayah"
+                app:elevation="60dp"
+                android:layout_gravity="center"
+                app:icon="@drawable/ic_baseline_play_circle_filled_24"
+                app:iconGravity="textStart" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

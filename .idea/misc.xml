@@ -19,9 +19,9 @@
         <entry key="app/src/main/res/layout/fragment_index_jozz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_juz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_page.xml" value="0.25060827250608275" />
-        <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.43125" />
+        <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_read_quran.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_sholat_schedule.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_index.xml" value="0.33" />
@@ -30,7 +30,7 @@
         <entry key="app/src/main/res/layout/item_index_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_index_surah.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_page_read_quran.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_read_quran.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_read_quran.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/main.xml" value="0.215625" />

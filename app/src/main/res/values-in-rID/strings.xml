@@ -31,4 +31,6 @@
     <string name="txt_play_all_ayah">Putar semua ayat</string>
     <string name="txt_bookmark_empty">Kamu belum menambahkan bookmark apapun</string>
     <string name="txt_bookmark_removed">Bookmark Dihapus</string>
+    <string name="txt_display">Tampilan</string>
+    <string name="txt_read_settings">Pengaturan Bacaan</string>
 </resources>

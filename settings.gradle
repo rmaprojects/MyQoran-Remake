@@ -15,4 +15,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MyQoran-Remake"
-include ':app', ':player', ':fastscroll'
+include ':app', ':fastscroll'
