@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item_play_mode" android:icon="@drawable/ic_round_repeat_24" app:showAsAction="always"
+        android:title="Play Mode" />
+
+    <item android:id="@+id/item_prev_ayah" android:icon="@drawable/ic_round_skip_previous_24" app:showAsAction="always"
+        android:title="Previous Ayah" />
+
+    <item android:id="@+id/item_play_or_pause" android:icon="@drawable/ic_baseline_pause_24" app:showAsAction="always"
+        android:title="Pause Ayah" />
+
+    <item android:id="@+id/item_next_ayah" android:icon="@drawable/ic_round_skip_next_24" app:showAsAction="always"
+        android:title="Next Ayah" />
+
+    <item android:id="@+id/item_stop" android:icon="@drawable/ic_round_stop_24" app:showAsAction="always"
+        android:title="Stop Ayah" />
+
+</menu>

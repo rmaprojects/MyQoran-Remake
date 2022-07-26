@@ -37,4 +37,10 @@
     <string name="txt_bookmark_removed">Bookmark Removed</string>
     <string name="txt_display">Display</string>
     <string name="txt_read_settings">Reading Settings</string>
+    <string name="txt_read_by_surah">Read by Surah</string>
+    <string name="txt_read_by_jozz">Read by Juz</string>
+    <string name="txt_read_by_page">Read by Page</string>
+    <string name="txt_error_occurred">Error Occurred</string>
+    <string name="txt_ayah">Ayah</string>
+    <string name="txt_succeed_copy_ayah">Ayah successfully copied</string>
 </resources>

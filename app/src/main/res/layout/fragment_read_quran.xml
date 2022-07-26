@@ -23,4 +23,24 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_close"
+        android:layout_width="match_parent"
+        app:layout_anchor="@id/bottom_appbar"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+        android:src="@drawable/ic_baseline_close_24"
+        android:contentDescription="Play Button" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_appbar"
+        android:layout_width="match_parent"
+        app:fabAlignmentMode="end"
+        app:fabAnimationMode="slide"
+        android:layout_gravity="bottom"
+        app:menu="@menu/play_menu"
+        app:hideOnScroll="true"
+        app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior"
+        android:layout_height="wrap_content"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

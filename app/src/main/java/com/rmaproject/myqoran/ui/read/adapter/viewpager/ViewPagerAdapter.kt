@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.asLiveData
@@ -18,8 +19,8 @@ import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.BookmarkDatabase
 import com.rmaproject.myqoran.database.QuranDatabase
 import com.rmaproject.myqoran.database.model.Quran
+import com.rmaproject.myqoran.databinding.FragmentReadQuranBinding
 import com.rmaproject.myqoran.databinding.ItemPageReadQuranBinding
-import com.rmaproject.myqoran.service.MyPlayerService
 import com.rmaproject.myqoran.ui.footnotes.FootNotesBottomSheetFragment
 import com.rmaproject.myqoran.ui.read.ReadFragment
 import com.rmaproject.myqoran.ui.read.adapter.recyclerview.RecyclerViewReadQuranAdapter
@@ -42,7 +43,9 @@ class ViewPagerAdapter(
     private val isFromHome: Boolean,
     private val lifecycleScope: LifecycleCoroutineScope,
     private val isFromBookmark: Boolean,
-    private val bookmarkAyahNumber: Int
+    private val bookmarkAyahNumber: Int,
+    private val playerClient: PlayerClient,
+    private val parentBinding: FragmentReadQuranBinding
 ) : Adapter<ViewPagerAdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerAdapterViewHolder {
@@ -64,7 +67,9 @@ class ViewPagerAdapter(
             isFromHome,
             lifecycleScope,
             isFromBookmark,
-            bookmarkAyahNumber
+            bookmarkAyahNumber,
+            playerClient,
+            parentBinding
         )
     }
 
@@ -82,7 +87,9 @@ class ViewPagerAdapter(
             isFromHome: Boolean,
             lifecycleScope: LifecycleCoroutineScope,
             isFromBookmark: Boolean,
-            bookmarkAyahNumber: Int
+            bookmarkAyahNumber: Int,
+            playerClient: PlayerClient,
+            parentBinding: FragmentReadQuranBinding
         ) {
             setAdapter(
                 indexType,
@@ -94,7 +101,9 @@ class ViewPagerAdapter(
                 isFromHome,
                 lifecycleScope,
                 isFromBookmark,
-                bookmarkAyahNumber
+                bookmarkAyahNumber,
+                playerClient,
+                parentBinding
             )
         }
 
@@ -108,7 +117,9 @@ class ViewPagerAdapter(
             isFromHome: Boolean,
             lifecycleScope: LifecycleCoroutineScope,
             isFromBookmark: Boolean,
-            bookmarkAyahNumber: Int
+            bookmarkAyahNumber: Int,
+            playerClient: PlayerClient,
+            parentBinding: FragmentReadQuranBinding
         ) {
             val quranDao = QuranDatabase.getInstance(context).quranDao()
             val lastReadPosition = RecentReadPreferences.lastReadPosition
@@ -140,8 +151,8 @@ class ViewPagerAdapter(
                             }
 
                             setupBookmarkOnClick(adapter, context, lifecycleScope)
-                            setupPlayAyahOnClick(adapter, context)
-                            setupPlayAllAyahOnClick(adapter, context)
+                            setupPlayAyahOnClick(adapter, playerClient, parentBinding)
+                            setupPlayAllAyahOnClick(adapter, playerClient, parentBinding)
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -164,7 +175,7 @@ class ViewPagerAdapter(
                             }
 
                             setupBookmarkOnClick(adapter, context, lifecycleScope)
-                            setupPlayAyahOnClick(adapter, context)
+                            setupPlayAyahOnClick(adapter, playerClient, parentBinding)
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -187,7 +198,7 @@ class ViewPagerAdapter(
                             }
 
                             setupBookmarkOnClick(adapter, context, lifecycleScope)
-                            setupPlayAyahOnClick(adapter, context)
+                            setupPlayAyahOnClick(adapter, playerClient, parentBinding)
                             showFootnotes(adapter, findNavController)
                         }
                 }
@@ -217,31 +228,48 @@ class ViewPagerAdapter(
             }
         }
 
-        private fun setupPlayAyahOnClick(adapter: RecyclerViewReadQuranAdapter, context: Context) {
-            val playerClient = PlayerClient.newInstance(context, MyPlayerService::class.java)
+        private fun setupPlayAyahOnClick(
+            adapter: RecyclerViewReadQuranAdapter,
+            playerClient: PlayerClient,
+            parentBinding: FragmentReadQuranBinding
+        ) {
             adapter.playAyahOnClickListener = { quran ->
                 playerClient.connect { isConnected ->
                     Log.d("CONNECTED?", isConnected.toString())
                     if (isConnected) {
+                        parentBinding.fabClose.isVisible = true
+                        parentBinding.bottomAppbar.isVisible = true
                         if (playerClient.isPlaying) {
                             playerClient.stop()
                         }
                         playerClient.setPlaylist(createPlayList(quran), true)
                         playerClient.playMode = PlayMode.SINGLE_ONCE
+                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode).setIcon(R.drawable.ic_round_repeat_24)
                     }
                 }
             }
         }
 
-        private fun setupPlayAllAyahOnClick(adapter: RecyclerViewReadQuranAdapter, context: Context) {
-            adapter.playAllAyahOnClickListener = { listQuran, position ->
-                val playerClient = PlayerClient.newInstance(context, MyPlayerService::class.java)
+        private fun setupPlayAllAyahOnClick(
+            adapter: RecyclerViewReadQuranAdapter,
+            playerClient: PlayerClient,
+            parentBinding: FragmentReadQuranBinding
+        ) {
+            adapter.playAllAyahOnClickListener = { listQuran, _ ->
                 playerClient.connect { isConnected ->
                     if (isConnected) {
                         val playlist = createPlayAllPlayList(listQuran)
+                        parentBinding.fabClose.isVisible = true
+                        parentBinding.bottomAppbar.isVisible = true
                         if (playerClient.isPlaying) {
                             playerClient.stop()
                         }
+                        playerClient.setPlaylist(playlist, true)
+                        playerClient.playMode = PlayMode.PLAYLIST_LOOP
+                        playerClient.addOnPlayingMusicItemChangeListener { _, position, _ ->
+                            binding.recyclerView.smoothScrollToPosition(position)
+                        }
+                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode).setIcon(R.drawable.ic_round_repeat_colored_24)
                     }
                 }
             }
@@ -252,6 +280,14 @@ class ViewPagerAdapter(
             listQuran.forEach { quran ->
                 val formattedAyahNumber = formatNumber(quran.ayahNumber)
                 val formattedSurahNumber = formatNumber(quran.surahNumber)
+                val playList = MusicItem.Builder()
+                    .setTitle("${quran.surahNameEn}: ${quran.ayahNumber}")
+                    .autoDuration()
+                    .setUri("https://www.everyayah.com/data/${getReciterName()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
+                    .setIconUri("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/10/04/676590316.jpg")
+                    .setMusicId("${quran.surahNumber}:${quran.ayahNumber}")
+                    .build()
+                ayahItemList.add(playList)
             }
             return Playlist.Builder()
                 .appendAll(ayahItemList)

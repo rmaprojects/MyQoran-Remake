@@ -91,7 +91,7 @@ class RecyclerViewReadQuranAdapter(
             listQuran: List<Quran>,
             position: Int,
         ) {
-            setTextViewValues(quran, totalAyah)
+            setTextViewValues(quran, totalAyah, context)
             setViewClickListener(context, quran, view, addBookmarkClickListener, playAyahOnClickListener, position)
             applySettingsPreferences(listQuran, context, indexType, position, playAllAyahOnClickListener)
         }
@@ -174,13 +174,13 @@ class RecyclerViewReadQuranAdapter(
             binding.txtTranslate.setText(spannable, TextView.BufferType.SPANNABLE)
         }
 
-        private fun setTextViewValues(quran: Quran, totalAyah: Int) {
+        private fun setTextViewValues(quran: Quran, totalAyah: Int, context: Context) {
             binding.apply {
                 headerSurahName.isVisible = quran.ayahNumber == 1
                 txtSurahNameEn.text = quran.surahNameEn
                 txtDescendPlace.text = quran.turunSurah
                 txtSurahNameAr.text = quran.surahNameAr
-                txtTotalAyah.text = "$totalAyah Ayah"
+                txtTotalAyah.text = "$totalAyah ${context.getString(R.string.txt_ayah)}"
                 txtTranslate.text = quran.translation_id
             }
         }
@@ -253,7 +253,7 @@ class RecyclerViewReadQuranAdapter(
                     clipboard.setPrimaryClip(clip)
                 }
             }
-            SnackbarHelper.showSnackbarShort(binding.root, "Ayat berhasil disalin", "Ok") {}
+            SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_succeed_copy_ayah), "Ok") {}
         }
 
         private fun insertBookmark(

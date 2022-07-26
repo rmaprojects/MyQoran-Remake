@@ -33,4 +33,9 @@
     <string name="txt_bookmark_removed">Bookmark Dihapus</string>
     <string name="txt_display">Tampilan</string>
     <string name="txt_read_settings">Pengaturan Bacaan</string>
+    <string name="txt_read_by_surah">Baca per Surat</string>
+    <string name="txt_read_by_jozz">Baca per Juz</string>
+    <string name="txt_read_by_page">Baca per halaman</string>
+    <string name="txt_error_occurred">Terjadi kesalahan</string>
+    <string name="txt_ayah">Ayat</string>
 </resources>
