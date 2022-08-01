@@ -51,7 +51,7 @@
                         android:layout_height="84dp"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:backgroundTint="?colorRecentReadContainer">
+                        android:backgroundTint="@color/recentReadColorContainer">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                                 android:layout_marginEnd="2dp"
                                 android:layout_marginBottom="2dp"
                                 android:src="@drawable/ic_baseline_history_24"
-                                app:tint="?colorRecentRead" />
+                                app:tint="@color/recentReadColor" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                                 android:text="@string/txt_recent_read"
                                 android:textStyle="bold"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                android:textColor="?colorRecentRead" />
+                                android:textColor="@color/recentReadColor" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/txt_recent_read"
@@ -90,9 +90,9 @@
                                 android:layout_marginTop="12dp"
                                 android:layout_marginEnd="12dp"
                                 android:layout_marginBottom="12dp"
-                                android:text="Al-Baqarah: 282"
+                                android:text="Belum baca"
                                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                android:textColor="?colorRecentRead" />
+                                android:textColor="@color/recentReadColor" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -104,7 +104,7 @@
                         android:layout_weight="1"
                         android:layout_margin="4dp"
                         android:background="?selectableItemBackground"
-                        android:backgroundTint="?colorBookmarkContainer">
+                        android:backgroundTint="@color/colorBookmarkContainer">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentTop="true"
                                 android:src="@drawable/ic_baseline_bookmark_24"
-                                app:tint="?colorBookmark" />
+                                app:tint="@color/bookmarkColor" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                                 android:layout_toRightOf="@id/bookmarkIcon"
                                 android:text="Bookmark"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                android:textColor="?colorBookmark"
+                                android:textColor="@color/bookmarkColor"
                                 android:textStyle="bold" />
 
                             <com.google.android.material.textview.MaterialTextView
@@ -140,7 +140,7 @@
                                 android:layout_marginBottom="12dp"
                                 android:text="Total Bookmark:"
                                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                android:textColor="?colorBookmark" />
+                                android:textColor="@color/bookmarkColor" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
@@ -219,6 +219,7 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                app:tabTextColor="?colorPrimary"
                 android:layout_centerInParent="true"
                 app:tabMode="fixed">
 

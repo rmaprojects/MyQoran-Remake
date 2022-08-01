@@ -25,7 +25,11 @@
         android:id="@+id/nav_settings"
         android:name="com.rmaproject.myqoran.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_nav_settings_to_pickColourBottomSheet"
+            app:destination="@id/pickColourBottomSheet" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_about"
@@ -60,4 +64,9 @@
             android:id="@+id/action_bookmarkFragment_to_nav_read_fragment"
             app:destination="@id/nav_read_fragment" />
     </fragment>
+    <dialog
+        tools:layout="@layout/fragment_bottomsheet_pick_colour"
+        android:id="@+id/pickColourBottomSheet"
+        android:name="com.rmaproject.myqoran.ui.settings.bottomsheet.PickColourBottomSheet"
+        android:label="Pick Colour Dialog" />
 </navigation>

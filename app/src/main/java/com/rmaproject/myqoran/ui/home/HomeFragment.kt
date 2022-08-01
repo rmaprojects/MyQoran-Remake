@@ -7,7 +7,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -30,9 +29,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding: FragmentHomeBinding by viewBinding()
     private val viewModel: MainTabViewModel by activityViewModels()
-    private val getTotalValues:ValuesViewModel by activityViewModels()
-    private val sholatScheduleViewModel:SholatScheduleViewModel by activityViewModels()
-    private lateinit var coroutineJob:Job
+    private val getTotalValues: ValuesViewModel by activityViewModels()
+    private val sholatScheduleViewModel: SholatScheduleViewModel by activityViewModels()
+    private lateinit var coroutineJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,8 +64,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             coroutineJob = CoroutineScope(Dispatchers.Main).launch {
                 while (true) {
-                    val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date()).split(":")
-                    txtGapBetweenPrayerTimes.text = sholatScheduleViewModel.getGapBetweenTimes(currentTime)
+                    val currentTime =
+                        SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date()).split(":")
+                    txtGapBetweenPrayerTimes.text =
+                        sholatScheduleViewModel.getGapBetweenTimes(currentTime)
                     delay(1000)
                 }
             }
@@ -102,7 +103,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun goToLastReadPage() {
-        val bundle:Bundle
+        val bundle: Bundle
         val isFromHome = true
         when (RecentReadPreferences.position) {
             0 -> {
@@ -148,7 +149,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             "Unknown Day"
         )
         val cal = UmmalquraCalendar(en)
-        val tanggalHijriyyah = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH)
+        val tanggalHijriyyah =
+            cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH)
         val tanggalanHijriyyah =
             "Sekarang tanggal: " + "${namaHari[converDayToID(tanggalHijriyyah)]}, ${cal[Calendar.DAY_OF_MONTH]} ${
                 cal.getDisplayName(

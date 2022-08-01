@@ -28,11 +28,6 @@
         <item name="colorPrimaryInverse">@color/md_theme_dark_primaryContainer_default</item>
 
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorBackground">@color/md_theme_dark_background_default</item>
-        <item name="colorBookmarkContainer">@color/bookmarkContainerColorDark</item>
-        <item name="colorBookmark">@color/bookmarkColorDark</item>
-        <item name="colorRecentRead">@color/recentReadColorDark</item>
-        <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Dark.NoActionBar">
@@ -62,12 +57,67 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface_blue</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface_blue</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_primaryInverse_blue</item>
-
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorBackground">@color/md_theme_dark_background_blue</item>
-        <item name="colorBookmarkContainer">@color/bookmarkContainerColorDark</item>
-        <item name="colorBookmark">@color/bookmarkColorDark</item>
-        <item name="colorRecentRead">@color/recentReadColorDark</item>
-        <item name="colorRecentReadContainer">@color/recentReadColorContainerDark</item>
     </style>
+
+    <style name="AppThemeGreen" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_dark_primary_green</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary_green</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer_green</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer_green</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary_green</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary_green</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer_green</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer_green</item>
+        <item name="colorTertiary">@color/md_theme_dark_tertiary_green</item>
+        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary_green</item>
+        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer_green</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer_green</item>
+        <item name="colorError">@color/md_theme_dark_error_green</item>
+        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer_green</item>
+        <item name="colorOnError">@color/md_theme_dark_onError_green</item>
+        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer_green</item>
+        <item name="android:colorBackground">@color/md_theme_dark_background_green</item>
+        <item name="colorOnBackground">@color/md_theme_dark_onBackground_green</item>
+        <item name="colorSurface">@color/md_theme_dark_surface_green</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface_green</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant_green</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant_green</item>
+        <item name="colorOutline">@color/md_theme_dark_outline_green</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface_green</item>
+        <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface_green</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_primaryInverse_green</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppThemeRed" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_dark_primary_red</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary_red</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer_red</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer_red</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary_red</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary_red</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer_red</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer_red</item>
+        <item name="colorTertiary">@color/md_theme_dark_tertiary_red</item>
+        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary_red</item>
+        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer_red</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer_red</item>
+        <item name="colorError">@color/md_theme_dark_error_red</item>
+        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer_red</item>
+        <item name="colorOnError">@color/md_theme_dark_onError_red</item>
+        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer_red</item>
+        <item name="android:colorBackground">@color/md_theme_dark_background_red</item>
+        <item name="colorOnBackground">@color/md_theme_dark_onBackground_red</item>
+        <item name="colorSurface">@color/md_theme_dark_surface_red</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface_red</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant_red</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant_red</item>
+        <item name="colorOutline">@color/md_theme_dark_outline_red</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface_red</item>
+        <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface_red</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_primaryInverse_red</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>

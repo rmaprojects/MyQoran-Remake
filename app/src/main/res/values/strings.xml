@@ -43,4 +43,13 @@
     <string name="txt_error_occurred">Error Occurred</string>
     <string name="txt_ayah">Ayah</string>
     <string name="txt_succeed_copy_ayah">Ayah successfully copied</string>
+    <string name="txt_current_qari">Current Qari:</string>
+    <string name="txt_def_color">Default (Purple)</string>
+    <string name="txt_blue_color">Blue</string>
+    <string name="txt_green_color">Green</string>
+    <string name="txt_red_color">Red</string>
+    <string name="txt_play_ayah">Putar Ayat</string>
+    <string name="txt_copy_ayah">Salin</string>
+    <string name="txt_share_ayah">Bagikan</string>
+    <string name="txt_bookmark_ayah">Bookmark</string>
 </resources>

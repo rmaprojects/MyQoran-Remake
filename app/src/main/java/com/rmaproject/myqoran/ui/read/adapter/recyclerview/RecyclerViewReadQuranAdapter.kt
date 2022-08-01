@@ -44,15 +44,17 @@ class RecyclerViewReadQuranAdapter(
 ) : Adapter<RecyclerViewReadQuranAdapterViewHolder>(), FastScroller.SectionIndexer {
 
     var footNoteonClickListener: ((String) -> Unit)? = null
-    var addBookmarkClickListener:((Bookmark) -> Unit)? = null
-    var playAllAyahOnClickListener:((List<Quran>, Int) -> Unit)? = null
-    var playAyahOnClickListener: ((Quran) -> Unit)? = null
+    var addBookmarkClickListener: ((Bookmark) -> Unit)? = null
+    var playAllAyahOnClickListener: ((List<Quran>, Int) -> Unit)? = null
+    var playAyahOnClickListener: ((List<Quran>, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerViewReadQuranAdapterViewHolder {
-        return RecyclerViewReadQuranAdapterViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_read_quran, parent, false))
+        return RecyclerViewReadQuranAdapterViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_read_quran, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerViewReadQuranAdapterViewHolder, position: Int) {
@@ -60,17 +62,27 @@ class RecyclerViewReadQuranAdapter(
         val totalAyah = listTotalAyah[quran.surahNumber!! - 1]
         val context = holder.itemView.context
         captureLastReadQuran(quran, position)
-        holder.bindView(quran, totalAyah, context, indexType, addBookmarkClickListener, playAllAyahOnClickListener, playAyahOnClickListener, listQuran, position)
+        holder.bindView(
+            quran,
+            totalAyah,
+            context,
+            indexType,
+            addBookmarkClickListener,
+            playAllAyahOnClickListener,
+            playAyahOnClickListener,
+            listQuran,
+            position
+        )
         holder.footNoteTracker(holder.itemView, quran, footNoteonClickListener, SettingsPreferences)
     }
 
-    private fun captureLastReadQuran(quran:Quran, quranIndex:Int) {
+    private fun captureLastReadQuran(quran: Quran, quranIndex: Int) {
         RecentReadPreferences.apply {
             lastReadSurah = "${quran.surahNameEn}"
             lastReadAyah = "${quran.ayahNumber}"
-            lastReadSurahNumber = quran.surahNumber?:1
-            lastReadJuzNumber = quran.juzNumber?:1
-            lastReadPageNumber = quran.page?:1
+            lastReadSurahNumber = quran.surahNumber ?: 1
+            lastReadJuzNumber = quran.juzNumber ?: 1
+            lastReadPageNumber = quran.page ?: 1
             lastReadPosition = quranIndex
             position = indexType
         }
@@ -78,8 +90,8 @@ class RecyclerViewReadQuranAdapter(
 
     override fun getItemCount() = listQuran.size
 
-    class RecyclerViewReadQuranAdapterViewHolder(val view:View) : ViewHolder(view) {
-        val binding:ItemReadQuranBinding by viewBinding()
+    class RecyclerViewReadQuranAdapterViewHolder(val view: View) : ViewHolder(view) {
+        val binding: ItemReadQuranBinding by viewBinding()
         fun bindView(
             quran: Quran,
             totalAyah: Int,
@@ -87,13 +99,27 @@ class RecyclerViewReadQuranAdapter(
             indexType: Int,
             addBookmarkClickListener: ((Bookmark) -> Unit)?,
             playAllAyahOnClickListener: ((List<Quran>, Int) -> Unit)?,
-            playAyahOnClickListener: ((Quran) -> Unit)?,
+            playAyahOnClickListener: ((List<Quran>, Int) -> Unit)?,
             listQuran: List<Quran>,
             position: Int,
         ) {
             setTextViewValues(quran, totalAyah, context)
-            setViewClickListener(context, quran, view, addBookmarkClickListener, playAyahOnClickListener, position)
-            applySettingsPreferences(listQuran, context, indexType, position, playAllAyahOnClickListener)
+            setViewClickListener(
+                context,
+                quran,
+                view,
+                addBookmarkClickListener,
+                playAyahOnClickListener,
+                listQuran,
+                position
+            )
+            applySettingsPreferences(
+                listQuran,
+                context,
+                indexType,
+                position,
+                playAllAyahOnClickListener
+            )
         }
 
         private fun applySettingsPreferences(
@@ -130,12 +156,17 @@ class RecyclerViewReadQuranAdapter(
             return textWithoutNumber + digit.reversed().joinToString("")
         }
 
-        private fun applyTajweed(quran: Quran, context: Context) : Spannable {
+        private fun applyTajweed(quran: Quran, context: Context): Spannable {
             val ayahText = reverseAyahNumber(quran)
             return TajweedHelper.getTajweed(context, ayahText)
         }
 
-        fun footNoteTracker(view: View, quran:Quran, footNoteonClickListener: ((String) -> Unit)?, preferences:SettingsPreferences) {
+        fun footNoteTracker(
+            view: View,
+            quran: Quran,
+            footNoteonClickListener: ((String) -> Unit)?,
+            preferences: SettingsPreferences
+        ) {
             val colorPrimary = MaterialColors.getColor(view, android.R.attr.colorPrimary)
             val translate = when (preferences.languagePreference) {
                 0 -> quran.translation_id
@@ -149,7 +180,7 @@ class RecyclerViewReadQuranAdapter(
             val spannable = SpannableStringBuilder(translate)
             val pattern = Pattern.compile("""[0-9]""", Pattern.CASE_INSENSITIVE)
             val matcher = pattern.matcher(translate)
-            while (matcher.find()){
+            while (matcher.find()) {
                 val clickableOpen = object : ClickableSpan() {
                     override fun updateDrawState(ds: TextPaint) {
                         ds.color = colorPrimary
@@ -159,16 +190,33 @@ class RecyclerViewReadQuranAdapter(
                     override fun onClick(p0: View) {
                         footNoteonClickListener?.invoke(
                             when (preferences.languagePreference) {
-                                0 -> quran.footnotes_id?:""
-                                1 -> quran.footnotes_en?:""
-                                else -> { "Error" }
+                                0 -> quran.footnotes_id ?: ""
+                                1 -> quran.footnotes_en ?: ""
+                                else -> {
+                                    "Error"
+                                }
                             }
                         )
                     }
                 }
-                spannable.setSpan(clickableOpen, matcher.start(), matcher.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                spannable.setSpan(RelativeSizeSpan(0.8F), matcher.start(), matcher.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                spannable.setSpan(SuperscriptSpan(), matcher.start(), matcher.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                spannable.setSpan(
+                    clickableOpen,
+                    matcher.start(),
+                    matcher.end(),
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+                spannable.setSpan(
+                    RelativeSizeSpan(0.8F),
+                    matcher.start(),
+                    matcher.end(),
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+                spannable.setSpan(
+                    SuperscriptSpan(),
+                    matcher.start(),
+                    matcher.end(),
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
             }
             binding.txtTranslate.movementMethod = LinkMovementMethod.getInstance()
             binding.txtTranslate.setText(spannable, TextView.BufferType.SPANNABLE)
@@ -190,16 +238,20 @@ class RecyclerViewReadQuranAdapter(
             quran: Quran,
             view: View,
             addBookmarkClickListener: ((Bookmark) -> Unit)?,
-            playAyahOnClickListener: ((Quran) -> Unit)?,
+            playAyahOnClickListener: ((List<Quran>, Int) -> Unit)?,
+            listQuran: List<Quran>,
             position: Int
         ) {
             binding.run {
                 btnPlayAllAyah.setOnClickListener {
-                    SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_play_all_ayah), "Ok") {}
+                    SnackbarHelper.showSnackbarShort(
+                        binding.root,
+                        context.getString(R.string.txt_play_all_ayah),
+                        "Ok"
+                    ) {}
                 }
                 txtAyah.setOnLongClickListener {
-                    val powerMenu = PowerMenu.Builder(context)
-                    powerMenu.apply {
+                    PowerMenu.Builder(context).apply {
                         setAnimation(SHOWUP_TOP_RIGHT)
                         setMenuRadius(32F)
                         setAutoDismiss(true)
@@ -208,13 +260,17 @@ class RecyclerViewReadQuranAdapter(
                         setIconColor(MaterialColors.getColor(view, android.R.attr.colorPrimary))
                         setTextSize(18)
                         setWidth(650)
-                        addItemList(getPowerItemList())
+                        addItemList(getPowerItemList(context))
                         setOnMenuItemClickListener { menuPosition, _ ->
                             when (menuPosition) {
-                                PLAY_AYAH -> playAyah(playAyahOnClickListener, quran)
+                                PLAY_AYAH -> playAyah(playAyahOnClickListener, listQuran, position)
                                 COPY_AYAH -> copyAyah(context, quran)
                                 SHARE_AYAH -> shareAyah(context, quran)
-                                BOOKMARK_AYAH -> insertBookmark(quran, position, addBookmarkClickListener)
+                                BOOKMARK_AYAH -> insertBookmark(
+                                    quran,
+                                    position,
+                                    addBookmarkClickListener
+                                )
                             }
                         }
                     }.build().showAsDropDown(txtAyah)
@@ -223,12 +279,12 @@ class RecyclerViewReadQuranAdapter(
             }
         }
 
-        private fun getPowerItemList() : List<PowerMenuItem> {
+        private fun getPowerItemList(context:Context): List<PowerMenuItem> {
             return listOf(
-                PowerMenuItem("Putar Ayat", R.drawable.ic_baseline_play_circle_filled_24, false),
-                PowerMenuItem("Salin", R.drawable.ic_baseline_content_copy_24, false),
-                PowerMenuItem("Bagikan", R.drawable.ic_baseline_share_24, false),
-                PowerMenuItem("Bookmark", R.drawable.ic_baseline_bookmark_24, false),
+                PowerMenuItem(context.getString(R.string.txt_play_ayah), R.drawable.ic_baseline_play_circle_filled_24, false),
+                PowerMenuItem(context.getString(R.string.txt_copy_ayah), R.drawable.ic_baseline_content_copy_24, false),
+                PowerMenuItem(context.getString(R.string.txt_share_ayah), R.drawable.ic_baseline_share_24, false),
+                PowerMenuItem(context.getString(R.string.txt_bookmark_ayah), R.drawable.ic_baseline_bookmark_24, false),
             )
         }
 
@@ -242,18 +298,28 @@ class RecyclerViewReadQuranAdapter(
 
         private fun copyAyah(context: Context, quran: Quran) {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip:ClipData
+            val clip: ClipData
             when (SettingsPreferences.languagePreference) {
                 0 -> {
-                    clip = ClipData.newPlainText(quran.surahNameEn, "${quran.ayahText}\n\n${quran.translation_id}")
+                    clip = ClipData.newPlainText(
+                        quran.surahNameEn,
+                        "${quran.ayahText}\n\n${quran.translation_id}"
+                    )
                     clipboard.setPrimaryClip(clip)
                 }
                 1 -> {
-                    clip = ClipData.newPlainText(quran.surahNameEn, "${quran.ayahText}\n\n${quran.translation_en}")
+                    clip = ClipData.newPlainText(
+                        quran.surahNameEn,
+                        "${quran.ayahText}\n\n${quran.translation_en}"
+                    )
                     clipboard.setPrimaryClip(clip)
                 }
             }
-            SnackbarHelper.showSnackbarShort(binding.root, context.getString(R.string.txt_succeed_copy_ayah), "Ok") {}
+            SnackbarHelper.showSnackbarShort(
+                binding.root,
+                context.getString(R.string.txt_succeed_copy_ayah),
+                "Ok"
+            ) {}
         }
 
         private fun insertBookmark(
@@ -262,16 +328,30 @@ class RecyclerViewReadQuranAdapter(
             addBookmarkClickListener: ((Bookmark) -> Unit)?
         ) {
             val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-            val bookmark = Bookmark(null, quran.surahNameEn, quran.ayahNumber, quran.surahNumber,position, quran.ayahText, currentDate, Date().time)
+            val bookmark = Bookmark(
+                null,
+                quran.surahNameEn,
+                quran.ayahNumber,
+                quran.surahNumber,
+                position,
+                quran.ayahText,
+                currentDate,
+                Date().time
+            )
             addBookmarkClickListener?.invoke(bookmark)
-            SnackbarHelper.showSnackbarShort(binding.root, "Surat ${quran.surahNameEn}: ${quran.ayahNumber} berhasil ditambahkan ke bookmark", "Ok") {}
+            SnackbarHelper.showSnackbarShort(
+                binding.root,
+                "Surat ${quran.surahNameEn}: ${quran.ayahNumber} berhasil ditambahkan ke bookmark",
+                "Ok"
+            ) {}
         }
 
         private fun playAyah(
-            playAyahOnClickListener: ((Quran) -> Unit)?,
-            quran: Quran
+            playAyahOnClickListener: ((List<Quran>, Int) -> Unit)?,
+            listQuran: List<Quran>,
+            position:Int
         ) {
-            playAyahOnClickListener?.invoke(quran)
+            playAyahOnClickListener?.invoke(listQuran, position)
         }
 
         companion object {
@@ -283,7 +363,7 @@ class RecyclerViewReadQuranAdapter(
 
     }
 
-    override fun getSectionText(position: Int) : String {
+    override fun getSectionText(position: Int): String {
         val quran = listQuran[position]
         return "${quran.surahNameEn}:${quran.ayahNumber}"
     }

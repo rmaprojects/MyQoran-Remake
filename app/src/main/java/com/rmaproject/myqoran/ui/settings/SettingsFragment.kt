@@ -1,10 +1,10 @@
 package com.rmaproject.myqoran.ui.settings
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
@@ -27,11 +27,65 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         ayahTextSizeViewConfiguration(preferences)
         languageViewConfiguration(preferences)
         focusReadViewConfiguration(preferences)
+        reciterNameConfiguration(preferences)
+        changeColourAccentConfiguration()
+    }
+
+    private fun changeColourAccentConfiguration() {
+        binding.cardSettingsChangeTheme.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_settings_to_pickColourBottomSheet)
+        }
+    }
+
+    private fun reciterNameConfiguration(preferences: SettingsPreferences) {
+        binding.cardSettingsReciter.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext()).apply {
+                setTitle("Pilih Qari")
+                setItems(
+                    arrayOf(
+                        "Abdurrahman As Sudais",
+                        "Alafasy",
+                        "Hudaify",
+                        "Muhammad Ayyoub",
+                    )
+                ) { _, position ->
+                    preferences.currentReciter = position
+                    binding.txtCurrentQari.text =
+                        getString(R.string.txt_current_qari) + " " + when (position) {
+                            0 -> "Abdurrahman As Sudais"
+                            1 -> "Alafasy"
+                            2 -> "Hudaify"
+                            3 -> "Muhammad Ayyoub"
+                            else -> "Abdurrahman As Sudais"
+                        }
+                }
+            }.create().show()
+        }
+    }
+
+    private fun initialisation(preferences: SettingsPreferences) {
+        binding.switchSettingsDarkMode.isChecked = preferences.isDarkMode
+        binding.switchSettingsDisableTajweed.isChecked = preferences.showTajweed
+        binding.sliderSettingsAyahSize.value = preferences.ayahSizePreference
+        binding.txtSettingsAyahPreview.textSize = preferences.ayahSizePreference
+        binding.txtStatusReadingMode.text = when (preferences.isOnFocusRead) {
+            false -> getString(R.string.txt_status_deactivated)
+            true -> getString(R.string.txt_status_activated)
+        }
+        binding.txtCurrentQari.text =
+            getString(R.string.txt_current_qari) + " " + when (preferences.currentReciter) {
+                0 -> "Abdurrahman As Sudais"
+                1 -> "Alafasy"
+                2 -> "Hudaify"
+                3 -> "Muhammad Ayyoub"
+                else -> "Abdurrahman As Sudais"
+            }
     }
 
     private fun focusReadViewConfiguration(preferences: SettingsPreferences) {
 
-        val choises = arrayOf(getString(R.string.txt_activated), getString(R.string.txt_deactivated))
+        val choises =
+            arrayOf(getString(R.string.txt_activated), getString(R.string.txt_deactivated))
         val selected = when (preferences.isOnFocusRead) {
             true -> 0
             false -> 1
@@ -101,17 +155,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.sliderSettingsAyahSize.addOnChangeListener { _, value, _ ->
             preferences.ayahSizePreference = value
             binding.txtSettingsAyahPreview.textSize = value
-        }
-    }
-
-    private fun initialisation(preferences: SettingsPreferences) {
-        binding.switchSettingsDarkMode.isChecked = preferences.isDarkMode
-        binding.switchSettingsDisableTajweed.isChecked = preferences.showTajweed
-        binding.sliderSettingsAyahSize.value = preferences.ayahSizePreference
-        binding.txtSettingsAyahPreview.textSize = preferences.ayahSizePreference
-        binding.txtStatusReadingMode.text = when (preferences.isOnFocusRead) {
-            false -> getString(R.string.txt_status_deactivated)
-            true -> getString(R.string.txt_status_activated)
         }
     }
 

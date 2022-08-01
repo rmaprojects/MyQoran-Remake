@@ -35,31 +35,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val binding: ActivityMainBinding by viewBinding()
-    private lateinit var airLocation:AirLocation
-    private val locationViewModel:LocationViewModel by viewModels()
-    private val sholatScheduleViewModel:SholatScheduleViewModel by viewModels()
-
-    override fun onStart() {
-        super.onStart()
-
-        if (isLocationEnabled(this)) {
-            airLocation.start()
-        } else {
-            val longitude = locationViewModel.getLongitude()
-            val latitude = locationViewModel.getLatitude()
-            val api = ApiInterface.createApi()
-            SnackbarHelper.showSnackbarShort(binding.root, "Akses lokasi dinonaktifkan,\nberalih ke lokasi default", "Ok") {}
-            fetchApi(longitude, latitude, api)
-        }
-    }
+    private lateinit var airLocation: AirLocation
+    private val locationViewModel: LocationViewModel by viewModels()
+    private val sholatScheduleViewModel: SholatScheduleViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
         applyDarkModeSettings()
-        setContentView(binding.root)
+        applyColourAccent()
 
-        airLocation = AirLocation(this, object: Callback {
+        super.onCreate(savedInstanceState)
+
+        airLocation = AirLocation(this, object : Callback {
             override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
 
                 val longitude = locationViewModel.getLongitude()
@@ -83,6 +70,22 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }, true)
 
+        if (isLocationEnabled(this)) {
+            airLocation.start()
+        } else {
+            val longitude = locationViewModel.getLongitude()
+            val latitude = locationViewModel.getLatitude()
+            val api = ApiInterface.createApi()
+            SnackbarHelper.showSnackbarShort(
+                binding.root,
+                "Akses lokasi dinonaktifkan,\nberalih ke lokasi default",
+                "Ok"
+            ) {}
+            fetchApi(longitude, latitude, api)
+        }
+
+        setContentView(binding.root)
+
         setSupportActionBar(binding.appBarMain.toolbar)
         binding.drawerLayout
 
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,R.id.nav_settings, R.id.nav_about
+                R.id.nav_home, R.id.nav_settings, R.id.nav_about
             ), drawerLayout
         )
 
@@ -115,6 +118,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun applyColourAccent() {
+        when (SettingsPreferences.currentTheme) {
+            0 -> setTheme(R.style.AppThemeDefault)
+            1 -> setTheme(R.style.AppThemeBlue)
+            2 -> setTheme(R.style.AppThemeGreen)
+            3 -> setTheme(R.style.AppThemeRed)
+        }
     }
 
     private fun fetchApi(longitude: Double, latitude: Double, api: ApiInterface) {
@@ -139,7 +151,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 MaterialAlertDialogBuilder(this@MainActivity)
                     .setTitle("Terjadi kesalahan")
                     .setMessage("Internet dalam kondisi tidak baik, aktifkan internet anda")
-                    .setPositiveButton("Ok"){_, _ ->}
+                    .setPositiveButton("Ok") { _, _ -> }
                     .create()
                     .show()
             }

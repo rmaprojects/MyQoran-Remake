@@ -19,10 +19,10 @@ import java.util.*
 
 class SholatScheduleFragment : Fragment(R.layout.fragment_sholat_schedule) {
 
-    private val locationViewModel:LocationViewModel by activityViewModels()
-    private val sholatScheduleViewModel:SholatScheduleViewModel by activityViewModels()
-    private val binding:FragmentSholatScheduleBinding by viewBinding()
-    private lateinit var coroutineJob:Job
+    private val locationViewModel: LocationViewModel by activityViewModels()
+    private val sholatScheduleViewModel: SholatScheduleViewModel by activityViewModels()
+    private val binding: FragmentSholatScheduleBinding by viewBinding()
+    private lateinit var coroutineJob: Job
 
     override fun onStart() {
         super.onStart()
@@ -66,16 +66,21 @@ class SholatScheduleFragment : Fragment(R.layout.fragment_sholat_schedule) {
 
         coroutineJob = CoroutineScope(Dispatchers.Main).launch {
             while (true) {
-                val currentSystemClock = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                val currentSystemClock =
+                    SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
                 binding.txtCurrentClock.text = currentSystemClock.toString()
-                binding.txtPredictionNextSholat.text = sholatScheduleViewModel.getGapBetweenTimes(currentSystemClock.split(":"))
+                binding.txtPredictionNextSholat.text =
+                    sholatScheduleViewModel.getGapBetweenTimes(currentSystemClock.split(":"))
                 delay(1000)
             }
         }
     }
 
     private fun applyBindings() {
-        val geoCoder = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(locationViewModel.getLatitude(), locationViewModel.getLongitude(), 1)
+        val geoCoder = Geocoder(
+            requireContext(),
+            Locale.getDefault()
+        ).getFromLocation(locationViewModel.getLatitude(), locationViewModel.getLongitude(), 1)
         val locality = geoCoder[0].locality
         val subLocality = geoCoder[0].subLocality
         val subAdminArea = geoCoder[0].subAdminArea

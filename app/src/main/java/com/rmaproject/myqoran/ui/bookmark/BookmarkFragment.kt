@@ -27,8 +27,8 @@ import kotlinx.coroutines.launch
 
 class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
 
-    private val binding : FragmentBookmarkBinding by viewBinding()
-    private val valuesViewModel:ValuesViewModel by activityViewModels()
+    private val binding: FragmentBookmarkBinding by viewBinding()
+    private val valuesViewModel: ValuesViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +78,11 @@ class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
                     dao.deleteBookmark(bookmarks[position])
                     binding.recyclerViewBookmark.adapter?.notifyItemRemoved(position)
                 }
-                SnackbarHelper.showSnackbarShort(binding.root, getString(R.string.txt_bookmark_removed), "Ok") {}
+                SnackbarHelper.showSnackbarShort(
+                    binding.root,
+                    getString(R.string.txt_bookmark_removed),
+                    "Ok"
+                ) {}
             }
         }
 

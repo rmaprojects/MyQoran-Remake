@@ -101,4 +101,11 @@ dependencies {
 
     //Power Menu
     implementation "com.github.skydoves:powermenu:2.2.0"
+
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 }

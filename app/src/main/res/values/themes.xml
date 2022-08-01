@@ -29,12 +29,6 @@
 
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
-
-        <item name="colorBackground">#FFF</item>
-        <item name="colorBookmarkContainer">@color/bookmarkContainerColorLight</item>
-        <item name="colorBookmark">@color/bookmarkColor</item>
-        <item name="colorRecentRead">@color/recentReadColor</item>
-        <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
     </style>
 
     <style name="AppThemeBlue" parent="Theme.Material3.Light.NoActionBar">
@@ -65,13 +59,74 @@
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface_blue</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse_blue</item>
 
+        <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@color/md_theme_light_primary_blue</item>
+    </style>
+
+    <style name="AppThemeGreen" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary_green</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary_green</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer_green</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer_green</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary_green</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary_green</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer_green</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer_green</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary_green</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary_green</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer_green</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer_green</item>
+        <item name="colorError">@color/md_theme_light_error_green</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer_green</item>
+        <item name="colorOnError">@color/md_theme_light_onError_green</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer_green</item>
+        <item name="android:colorBackground">@color/md_theme_light_background_green</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground_green</item>
+        <item name="colorSurface">@color/md_theme_light_surface_green</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface_green</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant_green</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant_green</item>
+        <item name="colorOutline">@color/md_theme_light_outline_green</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface_green</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface_green</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse_green</item>
+
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
+        <item name="android:statusBarColor">@color/md_theme_light_primary_green</item>
+    </style>
 
-        <item name="colorBackground">#FFF</item>
-        <item name="colorBookmarkContainer">@color/bookmarkContainerColorLight</item>
-        <item name="colorBookmark">@color/bookmarkColor</item>
-        <item name="colorRecentRead">@color/recentReadColor</item>
-        <item name="colorRecentReadContainer">@color/recentReadColorContainerLight</item>
+    <style name="AppThemeRed" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary_red</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary_red</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer_red</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer_red</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary_red</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary_red</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer_red</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer_red</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary_red</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary_red</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer_red</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer_red</item>
+        <item name="colorError">@color/md_theme_light_error_red</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer_red</item>
+        <item name="colorOnError">@color/md_theme_light_onError_red</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer_red</item>
+        <item name="android:colorBackground">@color/md_theme_light_background_red</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground_red</item>
+        <item name="colorSurface">@color/md_theme_light_surface_red</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface_red</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant_red</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant_red</item>
+        <item name="colorOutline">@color/md_theme_light_outline_red</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface_red</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface_red</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse_red</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="Q">false</item>
+        <item name="android:statusBarColor">@color/md_theme_light_primary_red</item>
     </style>
 </resources>

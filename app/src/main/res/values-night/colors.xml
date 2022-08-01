@@ -7,5 +7,14 @@
     <color name="color_idghamwo">#ffabf0</color>
     <color name="color_ikhfa">#8cdb59</color>
 
+    <color name="colorBookmarkContainer">#00468c</color>
+    <color name="bookmarkColor">#d6e3ff</color>
+    <color name="recentReadColor">#ffdcb9</color>
+    <color name="recentReadColorContainer">#693c00</color>
     <color name="sholatSchedule">#00531b</color>
+
+    <color name="defaultColour">#D0BCFF</color>
+    <color name="blueColour">#4FDAD2</color>
+    <color name="greenColour">#88D97F</color>
+    <color name="redColour">#FFB3B1</color>
 </resources>

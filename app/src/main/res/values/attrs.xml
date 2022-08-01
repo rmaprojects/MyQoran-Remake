@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="colorBackground" format="color"/>
-    <attr name="colorBookmark" format="color"/>
-    <attr name="colorBookmarkContainer" format="color"/>
-    <attr name="colorRecentRead" format="color"/>
-    <attr name="colorRecentReadContainer" format="color"/>
-    <attr name="topAppbarColor" format="color"/>
-</resources>

@@ -17,7 +17,7 @@ import com.rmaproject.myqoran.viewmodel.MainTabViewModel
 
 class IndexByPageFragment : Fragment(R.layout.fragment_index_page) {
 
-    private val binding:FragmentIndexPageBinding by viewBinding()
+    private val binding: FragmentIndexPageBinding by viewBinding()
     private val viewModel by activityViewModels<MainTabViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

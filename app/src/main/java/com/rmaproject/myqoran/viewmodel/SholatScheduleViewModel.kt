@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SholatScheduleViewModel : ViewModel() {
-    var shubuhTime:String? = null
-    var dzuhurTime:String? = null
-    var asharTime:String? = null
-    var maghribTime:String? = null
-    var isyaTime:String? = null
+    var shubuhTime: String? = null
+    var dzuhurTime: String? = null
+    var asharTime: String? = null
+    var maghribTime: String? = null
+    var isyaTime: String? = null
 
     fun getGapBetweenTimes(currentTime: List<String>): String {
         val convertedCurrentTime = getCalendarTime(currentTime)
@@ -21,19 +21,44 @@ class SholatScheduleViewModel : ViewModel() {
 
         return when {
             shubuhState == true -> {
-                "${gapCounter(convertedCurrentTime, getCalendarTime(shubuhTime!!.split(":")))} lagi menuju sholat Shubuh"
+                "${
+                    gapCounter(
+                        convertedCurrentTime,
+                        getCalendarTime(shubuhTime!!.split(":"))
+                    )
+                } lagi menuju sholat Shubuh"
             }
             dzuhurState == true -> {
-                "${gapCounter(convertedCurrentTime, getCalendarTime(dzuhurTime!!.split(":")))} lagi menuju sholat Dzuhur"
+                "${
+                    gapCounter(
+                        convertedCurrentTime,
+                        getCalendarTime(dzuhurTime!!.split(":"))
+                    )
+                } lagi menuju sholat Dzuhur"
             }
             asharState == true -> {
-                "${gapCounter(convertedCurrentTime, getCalendarTime(asharTime!!.split(":")))} lagi menuju sholat Ashar"
+                "${
+                    gapCounter(
+                        convertedCurrentTime,
+                        getCalendarTime(asharTime!!.split(":"))
+                    )
+                } lagi menuju sholat Ashar"
             }
             maghribState == true -> {
-                "${gapCounter(convertedCurrentTime, getCalendarTime(maghribTime!!.split(":")))} lagi menuju sholat Maghrib"
+                "${
+                    gapCounter(
+                        convertedCurrentTime,
+                        getCalendarTime(maghribTime!!.split(":"))
+                    )
+                } lagi menuju sholat Maghrib"
             }
             isyaState == true -> {
-                "${gapCounter(convertedCurrentTime, getCalendarTime(isyaTime!!.split(":")))} lagi menuju sholat Isya"
+                "${
+                    gapCounter(
+                        convertedCurrentTime,
+                        getCalendarTime(isyaTime!!.split(":"))
+                    )
+                } lagi menuju sholat Isya"
             }
             else -> {
                 "Mengambil data..."
@@ -41,7 +66,7 @@ class SholatScheduleViewModel : ViewModel() {
         }
     }
 
-    private fun gapCounter(convertedCurrentTime: Calendar, convertedPrayerTime: Calendar) : String {
+    private fun gapCounter(convertedCurrentTime: Calendar, convertedPrayerTime: Calendar): String {
         val convertedIsyaTime = getCalendarTime(isyaTime!!.split(":"))
         if (convertedCurrentTime.timeInMillis > convertedIsyaTime.timeInMillis) {
             convertedPrayerTime.add(Calendar.DATE, 1)
@@ -57,7 +82,7 @@ class SholatScheduleViewModel : ViewModel() {
         }
     }
 
-    private fun getShubuhState(convertedCurrentTime: Calendar, prayerTime: String) : Boolean {
+    private fun getShubuhState(convertedCurrentTime: Calendar, prayerTime: String): Boolean {
         val convertedPrayerTime = getCalendarTime(prayerTime.split(":"))
         val convertedIsyaTime = getCalendarTime(isyaTime!!.split(":"))
         if (convertedCurrentTime.timeInMillis > convertedIsyaTime.timeInMillis) {
@@ -67,7 +92,7 @@ class SholatScheduleViewModel : ViewModel() {
         return convertedCurrentTime.timeInMillis < convertedPrayerTime.timeInMillis
     }
 
-    private fun getCalendarTime(splittedTime:List<String>?): Calendar {
+    private fun getCalendarTime(splittedTime: List<String>?): Calendar {
         val convertedTime = Calendar.getInstance()
         val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date()).toInt()
         splittedTime?.let {

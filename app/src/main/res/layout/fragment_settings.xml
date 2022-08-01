@@ -145,11 +145,12 @@
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp">
+
                 <ImageView
-                    android:layout_gravity="center_vertical"
                     android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_language_icon"
-                    android:layout_height="36dp"
                     app:tint="?colorPrimary" />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -168,6 +169,46 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="6dp"
                         android:text="@string/txt_desc_lang"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_settings_reciter"
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:background="?selectableItemBackground"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="36dp"
+                    android:src="@drawable/ic_baseline_volume_up_24"
+                    android:layout_height="36dp"
+                    app:tint="?colorPrimary" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:text="Ganti Qari"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_current_qari"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>

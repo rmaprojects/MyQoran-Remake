@@ -123,7 +123,7 @@ class ViewPagerAdapter(
         ) {
             val quranDao = QuranDatabase.getInstance(context).quranDao()
             val lastReadPosition = RecentReadPreferences.lastReadPosition
-            var adapter:RecyclerViewReadQuranAdapter
+            var adapter: RecyclerViewReadQuranAdapter
             when (indexType) {
                 ReadFragment.INDEX_BY_SURAH -> {
                     quranDao.readQuranBySurah(position + 1).asLiveData()
@@ -146,7 +146,7 @@ class ViewPagerAdapter(
                             if (isFromBookmark) {
                                 lifecycleScope.launch {
                                     delay(1000)
-                                    binding.recyclerView.scrollToPosition(bookmarkAyahNumber -1)
+                                    binding.recyclerView.scrollToPosition(bookmarkAyahNumber - 1)
                                 }
                             }
 
@@ -218,8 +218,12 @@ class ViewPagerAdapter(
             }
         }
 
-        private fun setupBookmarkOnClick(adapter: RecyclerViewReadQuranAdapter, context: Context, lifecycleScope: LifecycleCoroutineScope) {
-            adapter.addBookmarkClickListener =  { bookmark ->
+        private fun setupBookmarkOnClick(
+            adapter: RecyclerViewReadQuranAdapter,
+            context: Context,
+            lifecycleScope: LifecycleCoroutineScope
+        ) {
+            adapter.addBookmarkClickListener = { bookmark ->
                 val database = BookmarkDatabase.getInstance(context)
                 val dao = database.bookmarkDao()
                 lifecycleScope.launch {
@@ -233,7 +237,7 @@ class ViewPagerAdapter(
             playerClient: PlayerClient,
             parentBinding: FragmentReadQuranBinding
         ) {
-            adapter.playAyahOnClickListener = { quran ->
+            adapter.playAyahOnClickListener = { listQuran, position ->
                 playerClient.connect { isConnected ->
                     Log.d("CONNECTED?", isConnected.toString())
                     if (isConnected) {
@@ -242,9 +246,13 @@ class ViewPagerAdapter(
                         if (playerClient.isPlaying) {
                             playerClient.stop()
                         }
-                        playerClient.setPlaylist(createPlayList(quran), true)
+                        playerClient.setPlaylist(createPlayAllPlayList(listQuran), position, true)
                         playerClient.playMode = PlayMode.SINGLE_ONCE
-                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode).setIcon(R.drawable.ic_round_repeat_24)
+                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode)
+                            .setIcon(R.drawable.ic_round_repeat_24)
+                        playerClient.addOnPlayingMusicItemChangeListener { _, position, _->
+                            binding.recyclerView.smoothScrollToPosition(position)
+                        }
                     }
                 }
             }
@@ -269,7 +277,8 @@ class ViewPagerAdapter(
                         playerClient.addOnPlayingMusicItemChangeListener { _, position, _ ->
                             binding.recyclerView.smoothScrollToPosition(position)
                         }
-                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode).setIcon(R.drawable.ic_round_repeat_colored_24)
+                        parentBinding.bottomAppbar.menu.findItem(R.id.item_play_mode)
+                            .setIcon(R.drawable.ic_round_repeat_colored_24)
                     }
                 }
             }
@@ -283,7 +292,8 @@ class ViewPagerAdapter(
                 val playList = MusicItem.Builder()
                     .setTitle("${quran.surahNameEn}: ${quran.ayahNumber}")
                     .autoDuration()
-                    .setUri("https://www.everyayah.com/data/${getReciterName()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
+                    .setArtist(getReciterName())
+                    .setUri("https://www.everyayah.com/data/${getReciterId()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
                     .setIconUri("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/10/04/676590316.jpg")
                     .setMusicId("${quran.surahNumber}:${quran.ayahNumber}")
                     .build()
@@ -294,32 +304,43 @@ class ViewPagerAdapter(
                 .build()
         }
 
-        private fun createPlayList(quran: Quran) : Playlist {
-            val formattedAyahNumber = formatNumber(quran.ayahNumber)
-            val formattedSurahNumber = formatNumber(quran.surahNumber)
-            val playlistAyah = MusicItem.Builder()
-                .setTitle("${quran.surahNameEn}:${quran.ayahNumber}")
-                .autoDuration()
-                .setUri("https://www.everyayah.com/data/${getReciterName()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
-                .setIconUri("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/10/04/676590316.jpg")
-                .setMusicId("${quran.surahNumber}:${quran.ayahNumber}")
-                .build()
-            return Playlist.Builder()
-                .append(playlistAyah)
-                .build()
-        }
+//        private fun createPlayList(quran: Quran): Playlist {
+//            val formattedAyahNumber = formatNumber(quran.ayahNumber)
+//            val formattedSurahNumber = formatNumber(quran.surahNumber)
+//            val playlistAyah = MusicItem.Builder()
+//                .setTitle("${quran.surahNameEn}:${quran.ayahNumber}")
+//                .autoDuration()
+//                .setArtist(getReciterName())
+//                .setUri("https://www.everyayah.com/data/${getReciterId()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
+//                .setIconUri("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/10/04/676590316.jpg")
+//                .setMusicId("${quran.surahNumber}:${quran.ayahNumber}")
+//                .build()
+//            return Playlist.Builder()
+//                .append(playlistAyah)
+//                .build()
+//        }
 
-        private fun getReciterName() : String {
+        private fun getReciterId(): String {
             return when (SettingsPreferences.currentReciter) {
                 0 -> "Abdurrahmaan_As-Sudais_64kbps"
                 1 -> "Alafasy_64kbps"
                 2 -> "Hudhaify_64kbps"
                 3 -> "Muhammad_Ayyoub_64kbps"
-                else -> ""
+                else -> "Abdurrahmaan_As-Sudais_64kbps"
             }
         }
 
-        private fun formatNumber (numberToBeFormatted:Int?) : String {
+        private fun getReciterName(): String {
+            return when (SettingsPreferences.currentReciter) {
+                0 -> "Abdurrahman As Sudais"
+                1 -> "Alafasy"
+                2 -> "Hudaify"
+                3 -> "Muhammad Ayyoub"
+                else -> "Abdurrahman As Sudais"
+            }
+        }
+
+        private fun formatNumber(numberToBeFormatted: Int?): String {
             return String.format("%03d", numberToBeFormatted)
         }
     }
