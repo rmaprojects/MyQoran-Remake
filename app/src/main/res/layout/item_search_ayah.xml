@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_ayah"
+        android:longClickable="true"
+        android:layout_width="match_parent"
+        app:fontFamily="@font/usmani_font"
+        android:layout_margin="16dp"
+        android:textSize="32sp"
+        android:text="بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_translate"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:text="Dengan nama Alloh yang maha pengasih lagi maha penyayang"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_margin="12dp"
+        android:text="QS: Surah Al-Fatihah: 1"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

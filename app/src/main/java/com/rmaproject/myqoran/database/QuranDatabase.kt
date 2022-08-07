@@ -11,8 +11,8 @@ import java.io.File
 
 @Database(
     entities = [Quran::class],
-    views = [Surah::class, Juz::class, Page::class, LastAyahFinderPage::class, LastAyahFinderJuz::class, GetSurahNames::class, GetPageNames::class, GetJuzNames::class],
-    version = 1
+    views = [Surah::class, Juz::class, Page::class, LastAyahFinderPage::class, LastAyahFinderJuz::class, GetSurahNames::class, GetPageNames::class, GetJuzNames::class, SearchSurahResult::class],
+    version = 2
 )
 abstract class QuranDatabase : RoomDatabase() {
     abstract fun quranDao(): QuranDAO

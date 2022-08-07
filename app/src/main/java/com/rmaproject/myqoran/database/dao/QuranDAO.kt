@@ -38,9 +38,12 @@ interface QuranDAO {
     fun getSurahNames(): Flow<List<GetSurahNames>>
 
     @Query("SELECT * FROM GetJuzNames")
-    fun getJuzNames(): Flow<List<GetJuzNames>>
+    fun getJuzNames(): Flow<List<GetJuzNames>>;
 
     @Query("SELECT * FROM GetPageNames")
     fun getPageNames(): Flow<List<GetPageNames>>
+
+    @Query("SELECT * FROM searchsurahresult WHERE sora_name_emlaey LIKE :query OR sora = :query GROUP BY sora")
+    fun searchSurah(query:String):Flow<List<SearchSurahResult>>
 
 }

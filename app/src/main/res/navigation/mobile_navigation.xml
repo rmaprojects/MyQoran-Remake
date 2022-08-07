@@ -69,4 +69,13 @@
         android:id="@+id/pickColourBottomSheet"
         android:name="com.rmaproject.myqoran.ui.settings.bottomsheet.PickColourBottomSheet"
         android:label="Pick Colour Dialog" />
+    <fragment
+        android:id="@+id/searchSurahFragment"
+        tools:layout="@layout/fragment_search_surah"
+        android:name="com.rmaproject.myqoran.ui.search.searchsurah.SearchSurahFragment"
+        android:label="@string/txt_search_surah" >
+        <action
+            android:id="@+id/action_searchSurahFragment_to_nav_read_fragment"
+            app:destination="@id/nav_read_fragment" />
+    </fragment>
 </navigation>

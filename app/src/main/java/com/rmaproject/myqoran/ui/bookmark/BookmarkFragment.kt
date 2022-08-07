@@ -1,6 +1,9 @@
 package com.rmaproject.myqoran.ui.bookmark
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.database.BookmarkDatabase
 import com.rmaproject.myqoran.database.dao.BookmarkDAO
@@ -32,6 +36,8 @@ class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
 
         val db = BookmarkDatabase.getInstance(requireContext())
         val dao = db.bookmarkDao()
@@ -88,5 +94,27 @@ class BookmarkFragment : Fragment(R.layout.fragment_bookmark) {
 
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewBookmark)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bookmark, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_delete_all_bookmark -> {
+                val db = BookmarkDatabase.getInstance(requireContext())
+                val dao = db.bookmarkDao()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Hapus Semua Bookmark?")
+                    .setPositiveButton("Ya") { _,  _ ->
+                        lifecycleScope.launch {dao.deleteAllBookmark()}
+                    }
+                    .setNegativeButton("Batal") { _, _ -> }
+                true
+            }
+            else -> false
+        }
     }
 }
