@@ -8,19 +8,14 @@ import com.rmaproject.myqoran.ui.home.index.IndexByPageFragment
 import com.rmaproject.myqoran.ui.home.index.IndexBySurahFragment
 
 class ViewPagerAdapter (context : FragmentActivity) : FragmentStateAdapter(context) {
+
     override fun getItemCount() = 3
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
-            0 -> {
-                IndexBySurahFragment()
-            }
-            1 -> {
-                IndexByJuzFragment()
-            }
-            2 -> {
-                IndexByPageFragment()
-            }
+        return when(position) {
+            0 -> IndexBySurahFragment()
+            1 -> IndexByJuzFragment()
+            2 -> IndexByPageFragment()
             else -> throw Exception("Position not found")
         }
     }

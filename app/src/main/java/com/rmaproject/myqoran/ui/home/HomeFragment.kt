@@ -1,11 +1,16 @@
 package com.rmaproject.myqoran.ui.home
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -36,10 +41,33 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val menuHost : MenuHost = requireActivity()
+
+        createContextMenu(menuHost)
+
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
         setAdapter(viewPagerAdapter)
         setButtonHeader()
         setHijriDate()
+    }
+
+    private fun createContextMenu(menuHost: MenuHost) {
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_search_header, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.item_search -> {
+                        findNavController().navigate(R.id.action_nav_home_to_searchSurahFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun setButtonHeader() {
@@ -80,7 +108,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 viewModel.setTabPosition(position)
-                Log.d("page selected:", viewModel.getTabPosition().toString())
             }
         })
 

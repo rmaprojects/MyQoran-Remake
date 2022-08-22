@@ -304,22 +304,6 @@ class ViewPagerAdapter(
                 .build()
         }
 
-//        private fun createPlayList(quran: Quran): Playlist {
-//            val formattedAyahNumber = formatNumber(quran.ayahNumber)
-//            val formattedSurahNumber = formatNumber(quran.surahNumber)
-//            val playlistAyah = MusicItem.Builder()
-//                .setTitle("${quran.surahNameEn}:${quran.ayahNumber}")
-//                .autoDuration()
-//                .setArtist(getReciterName())
-//                .setUri("https://www.everyayah.com/data/${getReciterId()}/${formattedSurahNumber}${formattedAyahNumber}.mp3")
-//                .setIconUri("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/10/04/676590316.jpg")
-//                .setMusicId("${quran.surahNumber}:${quran.ayahNumber}")
-//                .build()
-//            return Playlist.Builder()
-//                .append(playlistAyah)
-//                .build()
-//        }
-
         private fun getReciterId(): String {
             return when (SettingsPreferences.currentReciter) {
                 0 -> "Abdurrahmaan_As-Sudais_64kbps"

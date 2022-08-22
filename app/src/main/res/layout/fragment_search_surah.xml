@@ -21,9 +21,11 @@
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:hint="@string/txt_search_ayah"
+                    android:hint="@string/txt_search_surah"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 

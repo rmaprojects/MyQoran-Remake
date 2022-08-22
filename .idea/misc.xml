@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.12545289855072464" />
         <entry key="app/src/main/res/drawable/collapse_background.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_time_filled_24.xml" value="0.176" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.175" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.1685" />
         <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.1685" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_round_repeat_24.xml" value="0.1685" />
         <entry key="app/src/main/res/drawable/ic_round_repeat_colored_24.xml" value="0.1685" />
         <entry key="app/src/main/res/drawable/ic_round_skip_next_24.xml" value="0.1685" />
@@ -32,7 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_index_page.xml" value="0.25060827250608275" />
         <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_read_quran.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_search_ayah.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_search_ayah.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search_surah.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sholat_schedule.xml" value="0.25" />
@@ -50,6 +52,7 @@
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/main.xml" value="0.215625" />
         <entry key="app/src/main/res/menu/menu_bookmark.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/menu/menu_search_header.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/menu/play_menu.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/menu/read_context_menu.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/menu/read_menu_context.xml" value="0.22604166666666667" />

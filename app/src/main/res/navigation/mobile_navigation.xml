@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_nav_home_to_nav_read_fragment"
-            app:destination="@id/nav_read_fragment" />
+            app:destination="@id/nav_read" />
         <action
             android:id="@+id/action_nav_home_to_sholatScheduleFragment"
             app:destination="@id/sholatScheduleFragment" />
         <action
             android:id="@+id/action_nav_home_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_searchSurahFragment"
+            app:destination="@id/nav_search_surah" />
     </fragment>
 
     <fragment
@@ -38,12 +41,15 @@
         tools:layout="@layout/fragment_about" />
     <fragment
         tools:layout="@layout/fragment_read_quran"
-        android:id="@+id/nav_read_fragment"
+        android:id="@+id/nav_read"
         android:name="com.rmaproject.myqoran.ui.read.ReadFragment"
         android:label="@string/nav_read_fragment" >
         <action
             android:id="@+id/action_nav_read_fragment_to_nav_bottom_sheet_footnotes"
             app:destination="@id/nav_bottom_sheet_footnotes" />
+        <action
+            android:id="@+id/action_nav_read_fragment_to_searchAyahFragment"
+            app:destination="@id/nav_search_ayah" />
     </fragment>
     <dialog
         tools:layout="@layout/fragment_bottomsheet_footnotes"
@@ -62,7 +68,7 @@
         android:label="Bookmark" >
         <action
             android:id="@+id/action_bookmarkFragment_to_nav_read_fragment"
-            app:destination="@id/nav_read_fragment" />
+            app:destination="@id/nav_read" />
     </fragment>
     <dialog
         tools:layout="@layout/fragment_bottomsheet_pick_colour"
@@ -70,12 +76,21 @@
         android:name="com.rmaproject.myqoran.ui.settings.bottomsheet.PickColourBottomSheet"
         android:label="Pick Colour Dialog" />
     <fragment
-        android:id="@+id/searchSurahFragment"
+        android:id="@+id/nav_search_surah"
         tools:layout="@layout/fragment_search_surah"
         android:name="com.rmaproject.myqoran.ui.search.searchsurah.SearchSurahFragment"
         android:label="@string/txt_search_surah" >
         <action
             android:id="@+id/action_searchSurahFragment_to_nav_read_fragment"
-            app:destination="@id/nav_read_fragment" />
+            app:destination="@id/nav_read" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_search_ayah"
+        android:name="com.rmaproject.myqoran.ui.search.searchayah.SearchAyahFragment"
+        android:label="Search Ayah"
+        tools:layout="@layout/fragment_search_ayah">
+        <action
+            android:id="@+id/action_searchAyahFragment_to_nav_bottom_sheet_footnotes"
+            app:destination="@id/nav_bottom_sheet_footnotes" />
     </fragment>
 </navigation>

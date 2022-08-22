@@ -46,4 +46,10 @@ interface QuranDAO {
     @Query("SELECT * FROM searchsurahresult WHERE sora_name_emlaey LIKE :query OR sora = :query GROUP BY sora")
     fun searchSurah(query:String):Flow<List<SearchSurahResult>>
 
+    @Query("SELECT * FROM quran WHERE translation_en LIKE :search OR aya_text_emlaey LIKE :search")
+    fun searchEntireQuranEn(search:String):Flow<List<Quran>>
+
+    @Query("SELECT * FROM quran WHERE translation_id LIKE :search OR aya_text_emlaey LIKE :search")
+    fun searchEntireQuranId(search:String):Flow<List<Quran>>
+
 }

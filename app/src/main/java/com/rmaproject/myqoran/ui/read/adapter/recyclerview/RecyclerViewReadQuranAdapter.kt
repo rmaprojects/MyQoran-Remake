@@ -141,6 +141,7 @@ class RecyclerViewReadQuranAdapter(
                 btnPlayAllAyah.setOnClickListener {
                     playAllAyahOnClickListener?.invoke(listQuran, position)
                 }
+                txtAyah.textSize = SettingsPreferences.ayahSizePreference
             }
         }
 

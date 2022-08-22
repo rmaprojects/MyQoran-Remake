@@ -4,7 +4,7 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
+import android.view.ContextMenu
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -100,23 +100,39 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             ), drawerLayout
         )
 
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            var toolbarIsVisible = true
             when (destination.id) {
                 R.id.nav_home -> {
-                    binding.appBarMain.toolbar.isVisible = true
+                    toolbarIsVisible = true
                 }
                 R.id.nav_settings -> {
-                    binding.appBarMain.toolbar.isVisible = true
+                    toolbarIsVisible = true
                 }
                 R.id.nav_about -> {
-                    binding.appBarMain.toolbar.isVisible = true
+                    toolbarIsVisible = true
                 }
-                R.id.nav_read_fragment -> {
-                    binding.appBarMain.toolbar.isVisible = true
+                R.id.nav_read -> {
+                    toolbarIsVisible = true
+                }
+                R.id.nav_search_surah -> {
+                    toolbarIsVisible = false
+                }
+                R.id.nav_search_ayah -> {
+                    toolbarIsVisible = false
+                }
+                R.id.nav_bottom_sheet_footnotes -> {
+                    toolbarIsVisible = false
+                }
+                else -> {
+                    toolbarIsVisible = true
                 }
             }
+
+            binding.appBarMain.toolbar.isVisible = toolbarIsVisible
         }
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
@@ -147,7 +163,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     sholatScheduleViewModel.isyaTime = null
                 }
             } catch (e: Exception) {
-                Log.d("Jadwal Sholat Err", e.toString())
                 MaterialAlertDialogBuilder(this@MainActivity)
                     .setTitle("Terjadi kesalahan")
                     .setMessage("Internet dalam kondisi tidak baik, aktifkan internet anda")
@@ -180,6 +195,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 

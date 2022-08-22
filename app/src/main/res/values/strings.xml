@@ -52,6 +52,6 @@
     <string name="txt_copy_ayah">Salin</string>
     <string name="txt_share_ayah">Bagikan</string>
     <string name="txt_bookmark_ayah">Bookmark</string>
-    <string name="txt_search_ayah">Search Ayah...</string>
-    <string name="txt_search_surah">Search Surah</string>
+    <string name="txt_search_ayah">Search Ayah…</string>
+    <string name="txt_search_surah">Search Surah…</string>
 </resources>

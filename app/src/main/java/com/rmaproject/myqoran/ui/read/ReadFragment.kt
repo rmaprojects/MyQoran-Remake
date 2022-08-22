@@ -1,10 +1,16 @@
 package com.rmaproject.myqoran.ui.read
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -43,8 +49,8 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
         val juzNumber = arguments?.getInt(JUZ_NUMBER_KEY) ?: 0
         val pageNumber = arguments?.getInt(PAGE_NUMBER_KEY) ?: 0
         val indexType = arguments?.getInt(TAB_POSITION)?: 0
-        val isFromHome = arguments?.getBoolean(IS_FROM_HOME_KEY)?:false
-        val isFromBookmark = arguments?.getBoolean(IS_FROM_BOOKMARK_KEY)?:false
+        val isFromHome = arguments?.getBoolean(IS_FROM_HOME_KEY)?: false
+        val isFromBookmark = arguments?.getBoolean(IS_FROM_BOOKMARK_KEY)?: false
         val bookmarkAyahNumber = arguments?.getInt(BOOKMARK_AYAH_NUMBER_KEY)?: 0
 
         var jumpToPosition = 0
@@ -70,9 +76,32 @@ class ReadFragment : Fragment(R.layout.fragment_read_quran) {
             }
         }
 
+        val menuHost:MenuHost = requireActivity()
+
+        createContextMenu(menuHost)
+
         viewModel.getTotalAyahList().observe(viewLifecycleOwner){ listTotalAyah ->
             setViewPagerAdapter(jumpToPosition, indexType,  totalIndex, listTotalAyah, isFromHome, isFromBookmark, bookmarkAyahNumber)
         }
+    }
+
+    private fun createContextMenu(menuHost: MenuHost) {
+        menuHost.addMenuProvider(object:MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_search_header, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.item_search -> {
+                        findNavController().navigate(R.id.action_nav_read_fragment_to_searchAyahFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun setupBottomAppBarMenu() {
