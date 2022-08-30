@@ -17,7 +17,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_input_query_search_ayah"
                 android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
                 app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

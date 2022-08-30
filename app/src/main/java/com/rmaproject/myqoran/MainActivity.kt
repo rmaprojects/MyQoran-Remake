@@ -4,7 +4,6 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -96,14 +95,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_settings, R.id.nav_about
+                R.id.nav_home, R.id.nav_settings, R.id.nav_about, R.id.nav_kibla
             ), drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            var toolbarIsVisible = true
+            var toolbarIsVisible:Boolean
             when (destination.id) {
                 R.id.nav_home -> {
                     toolbarIsVisible = true

@@ -33,6 +33,8 @@
         <entry key="app/src/main/res/layout/fragment_index_juz.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/fragment_index_page.xml" value="0.25060827250608275" />
         <entry key="app/src/main/res/layout/fragment_index_surah.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_kibla_finder.xml" value="0.1716485507246377" />
+        <entry key="app/src/main/res/layout/fragment_qibla_finder.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_read_quran.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search_ayah.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search_surah.xml" value="0.25" />

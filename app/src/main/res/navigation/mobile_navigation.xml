@@ -93,4 +93,8 @@
             android:id="@+id/action_searchAyahFragment_to_nav_bottom_sheet_footnotes"
             app:destination="@id/nav_bottom_sheet_footnotes" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_kibla"
+        android:name="com.rmaproject.myqoran.ui.qiblafinder.QiblaFinderFragment"
+        android:label="@string/menu_kiblat" tools:layout="@layout/fragment_qibla_finder" />
 </navigation>

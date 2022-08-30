@@ -12,22 +12,23 @@ import com.rmaproject.myqoran.R
 import com.rmaproject.myqoran.databinding.FragmentSettingsBinding
 import com.rmaproject.myqoran.ui.settings.preferences.SettingsPreferences
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
+class SettingsFragment : Fragment(R.layout.fragment_settings), Slider.OnSliderTouchListener {
 
     private val binding: FragmentSettingsBinding by viewBinding()
+    private lateinit var preferences:SettingsPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preferences = SettingsPreferences
+        preferences = SettingsPreferences
 
-        initialisation(preferences)
+        initialisation()
 
-        darkModeViewConfiguration(preferences)
-        disableTajweedViewConfiguration(preferences)
-        ayahTextSizeViewConfiguration(preferences)
-        languageViewConfiguration(preferences)
-        focusReadViewConfiguration(preferences)
-        reciterNameConfiguration(preferences)
+        darkModeViewConfiguration()
+        disableTajweedViewConfiguration()
+        ayahTextSizeViewConfiguration()
+        languageViewConfiguration()
+        focusReadViewConfiguration()
+        reciterNameConfiguration()
         changeColourAccentConfiguration()
     }
 
@@ -37,7 +38,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun reciterNameConfiguration(preferences: SettingsPreferences) {
+    private fun reciterNameConfiguration() {
         binding.cardSettingsReciter.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setTitle("Pilih Qari")
@@ -63,7 +64,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun initialisation(preferences: SettingsPreferences) {
+    private fun initialisation() {
         binding.switchSettingsDarkMode.isChecked = preferences.isDarkMode
         binding.switchSettingsDisableTajweed.isChecked = preferences.showTajweed
         binding.sliderSettingsAyahSize.value = preferences.ayahSizePreference
@@ -82,7 +83,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
     }
 
-    private fun focusReadViewConfiguration(preferences: SettingsPreferences) {
+    private fun focusReadViewConfiguration() {
 
         val choises =
             arrayOf(getString(R.string.txt_activated), getString(R.string.txt_deactivated))
@@ -112,7 +113,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun languageViewConfiguration(preferences: SettingsPreferences) {
+    private fun languageViewConfiguration() {
 
         val listLang = arrayOf("Indonesia", getString(R.string.txt_english))
 
@@ -138,19 +139,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
 
-    private fun ayahTextSizeViewConfiguration(preferences: SettingsPreferences) {
-        binding.sliderSettingsAyahSize.addOnSliderTouchListener(object :
-            Slider.OnSliderTouchListener {
-            override fun onStartTrackingTouch(slider: Slider) {
-                binding.txtSettingsAyahPreview.textSize = slider.value
-                preferences.ayahSizePreference = slider.value
-            }
-
-            override fun onStopTrackingTouch(slider: Slider) {
-                binding.txtSettingsAyahPreview.textSize = slider.value
-                preferences.ayahSizePreference = slider.value
-            }
-        })
+    private fun ayahTextSizeViewConfiguration() {
+        binding.sliderSettingsAyahSize.addOnSliderTouchListener(this)
 
         binding.sliderSettingsAyahSize.addOnChangeListener { _, value, _ ->
             preferences.ayahSizePreference = value
@@ -158,38 +148,25 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun disableTajweedViewConfiguration(preferences: SettingsPreferences) {
+    private fun disableTajweedViewConfiguration() {
         binding.switchSettingsDisableTajweed.setOnCheckedChangeListener { _, isChecked ->
             preferences.showTajweed = isChecked
         }
     }
 
-    private fun darkModeViewConfiguration(preferences: SettingsPreferences) {
+    private fun darkModeViewConfiguration() {
         binding.switchSettingsDarkMode.setOnCheckedChangeListener { buttonView, _ ->
             if (buttonView.isChecked) {
                 preferences.isDarkMode = true
-                setDarkMode(preferences)
+                setDarkMode()
             } else if (!buttonView.isChecked) {
                 preferences.isDarkMode = false
-                setDarkMode(preferences)
-            }
-        }
-
-        binding.cardSettingsDarkMode.setOnClickListener {
-            when (preferences.isDarkMode) {
-                true -> {
-                    preferences.isDarkMode = false
-                    setDarkMode(preferences)
-                }
-                false -> {
-                    preferences.isDarkMode = true
-                    setDarkMode(preferences)
-                }
+                setDarkMode()
             }
         }
     }
 
-    private fun setDarkMode(preferences: SettingsPreferences) {
+    private fun setDarkMode() {
         when (preferences.isDarkMode) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -198,5 +175,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+    }
+
+    override fun onStartTrackingTouch(slider: Slider) {
+        binding.txtSettingsAyahPreview.textSize = slider.value
+        preferences.ayahSizePreference = slider.value
+    }
+
+    override fun onStopTrackingTouch(slider: Slider) {
+        binding.txtSettingsAyahPreview.textSize = slider.value
+        preferences.ayahSizePreference = slider.value
     }
 }

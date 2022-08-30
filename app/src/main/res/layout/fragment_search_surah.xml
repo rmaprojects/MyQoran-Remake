@@ -18,12 +18,14 @@
                 android:id="@+id/txt_input_query_search_surah"
                 android:layout_width="match_parent"
                 app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:hint="@string/txt_search_surah"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:layout_marginHorizontal="8dp"
                     android:singleLine="true"
                     android:imeOptions="actionSearch"
                     />
